@@ -1,10 +1,11 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(git clean:*)",
+      "Bash(npm run build:*)"
+    ],
     "additionalDirectories": [
       "c:\\Users\\stustu\\Documents\\k-git"
-    ],
-    "allow": [
-      "Bash(git clean:*)"
     ]
   }
 }
