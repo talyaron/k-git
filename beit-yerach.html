@@ -165,14 +165,30 @@
             width: 100%;
         }
 
+<<<<<<< HEAD
         /* PolyMarket Link Special Style */
         .nav-poly {
             color: var(--teal-light) !important;
             font-weight: 700 !important;
+=======
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+>>>>>>> origin/main
         }
 
         /* --- Hero Section (Anti-Gravity & Depth) --- */
         .hero {
+<<<<<<< HEAD
+=======
+            margin-top: 0;
+            min-height: 100vh;
+>>>>>>> origin/main
             position: relative;
             min-height: 100vh;
             background: radial-gradient(circle at top right, #1a5f7a, #0d3a4a);
@@ -180,6 +196,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+<<<<<<< HEAD
             color: white;
             overflow: hidden;
             padding-top: 80px;
@@ -208,10 +225,73 @@
             bottom: 50px;
             left: -50px;
             animation: float 8s ease-in-out infinite reverse;
+=======
+            padding: 6rem 2rem 8rem;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .video-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: kenBurns 20s ease-in-out infinite alternate;
+            transform-origin: center center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, rgba(42, 127, 158, 0.82) 0%, rgba(26, 95, 122, 0.78) 40%, rgba(13, 58, 74, 0.88) 100%);
+            z-index: 2;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-2%, -2%); }
+        }
+
+        /* Wave SVG at bottom of hero */
+        .hero-wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            z-index: 5;
+            line-height: 0;
+        }
+
+        .hero-wave svg {
+            width: 100%;
+            height: 80px;
+            display: block;
+>>>>>>> origin/main
         }
 
         .hero-content {
             position: relative;
+<<<<<<< HEAD
             z-index: 10;
             max-width: 800px;
             padding: 2rem;
@@ -226,6 +306,63 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
+=======
+            z-index: 4;
+        }
+
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-content.visible > *:nth-child(1) {
+            animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-content.visible > *:nth-child(2) {
+            animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero-content.visible > *:nth-child(3) {
+            animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.7s;
+        }
+
+        .hero-content.visible > *:nth-child(4) {
+            animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.9s;
+        }
+
+        @keyframes heroReveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+>>>>>>> origin/main
         }
 
         .hero h1 small {
@@ -240,12 +377,28 @@
 
         .hero p {
             font-size: 1.25rem;
+<<<<<<< HEAD
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 3rem;
             font-weight: 300;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+=======
+            color: rgba(255, 255, 255, 0.9);
+            margin: 2rem auto 2.5rem;
+            max-width: 550px;
+            line-height: 1.7;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+>>>>>>> origin/main
         }
 
         /* Floating CTA Buttons */
@@ -284,9 +437,16 @@
             /* Offset float */
         }
 
+<<<<<<< HEAD
         .btn-outline:hover {
             border-color: #fff;
             background: rgba(255, 255, 255, 0.1);
+=======
+        .cta-button.outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+>>>>>>> origin/main
         }
 
         /* Scroll Indicator */
@@ -318,7 +478,41 @@
             border-radius: 2px;
         }
 
+<<<<<<< HEAD
         /* --- Sections General --- */
+=======
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Stagger children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
+
+        /* ===== SECTIONS ===== */
+>>>>>>> origin/main
         section {
             padding: 6rem 2rem;
             max-width: 1400px;
@@ -343,6 +537,7 @@
             margin: 0 auto;
         }
 
+<<<<<<< HEAD
         /* --- Bento Box Layout (About) --- */
         .bento-grid {
             display: grid;
@@ -357,6 +552,427 @@
             padding: 2rem;
             box-shadow: var(--shadow-soft);
             transition: all 0.4s ease;
+=======
+        /* ===== ABOUT SECTION - THE BIG ONE ===== */
+        #about {
+            background: white;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            padding-bottom: 0;
+        }
+
+        #about .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About intro */
+        .about-intro {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .lead {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, rgba(74, 159, 216, 0.06), rgba(45, 122, 74, 0.06));
+            padding: 2rem;
+            border-right: 4px solid var(--lake-blue);
+            border-radius: var(--radius-sm);
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .about-highlight:hover {
+            border-right-color: var(--accent);
+            transform: translateX(-4px);
+        }
+
+        .about-highlight strong {
+            color: var(--lake-blue);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-visual-card {
+            background: linear-gradient(135deg, var(--lake-blue), var(--lake-blue-dark));
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(126, 200, 227, 0.15) 0%, transparent 60%);
+            animation: floatOrb1 12s ease-in-out infinite;
+        }
+
+        @keyframes floatOrb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, 30px) scale(1.1); }
+            66% { transform: translate(-30px, -20px) scale(0.95); }
+        }
+
+        .about-visual-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .about-visual-card .subtitle {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .about-stat:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.18);
+        }
+
+        .about-stat .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            background: linear-gradient(135deg, white, var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-stat .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.2rem;
+        }
+
+        /* Fun Facts Marquee */
+        .about-funfacts-wrapper {
+            overflow: hidden;
+            padding: 3rem 0;
+            background: linear-gradient(90deg, white 0%, #f0f7fa 50%, white 100%);
+            position: relative;
+        }
+
+        .about-funfacts-wrapper::before,
+        .about-funfacts-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 2;
+        }
+
+        .about-funfacts-wrapper::before {
+            right: 0;
+            background: linear-gradient(to left, white, transparent);
+        }
+
+        .about-funfacts-wrapper::after {
+            left: 0;
+            background: linear-gradient(to right, white, transparent);
+        }
+
+        .funfacts-track {
+            display: flex;
+            gap: 2rem;
+            animation: marquee 35s linear infinite;
+            width: max-content;
+        }
+
+        .funfacts-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .funfact-card {
+            flex-shrink: 0;
+            width: 300px;
+            padding: 1.8rem;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .funfact-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .funfact-card .funfact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .funfact-card h4 {
+            color: var(--lake-blue);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .funfact-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .funfact-card .funfact-punchline {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.82rem;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* About Timeline */
+        .about-timeline {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .about-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 50%;
+            width: 3px;
+            background: linear-gradient(180deg, var(--light-blue), var(--lake-blue), var(--green));
+            border-radius: 3px;
+            transform: translateX(50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            right: calc(50% - 10px);
+            width: 20px;
+            height: 20px;
+            background: var(--lake-blue);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--lake-blue);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent), 0 0 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .timeline-card {
+            width: 43%;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-card .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lake-blue), var(--sky-blue));
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-card h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .timeline-card .timeline-joke {
+            color: var(--accent);
+            font-size: 0.82rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* About "Why Us" Grid */
+        .about-why-us {
+            padding: 4rem 0 5rem;
+        }
+
+        .about-why-us h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-why-us .why-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .why-card {
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .why-card:nth-child(1) {
+            background: linear-gradient(135deg, #e8f4f8, #d4eef5);
+        }
+
+        .why-card:nth-child(2) {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+
+        .why-card:nth-child(3) {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        }
+
+        .why-card:nth-child(4) {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .why-card .why-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .why-card:hover .why-icon {
+            transform: scale(1.2) rotate(-8deg);
+        }
+
+        .why-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card p {
+            color: #555;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .why-card .why-joke {
+            font-size: 0.82rem;
+            color: var(--lake-blue);
+            font-weight: 600;
+            margin-top: 0.8rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .why-card:hover .why-joke {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== STATS BANNER ===== */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--lake-blue) 0%, var(--lake-blue-dark) 100%);
+            padding: 4rem 2rem;
+>>>>>>> origin/main
             position: relative;
             overflow: hidden;
         }
@@ -535,7 +1151,93 @@
                 display: none;
             }
 
+<<<<<<< HEAD
             /* Mobile menu simplified for snippet */
+=======
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .hero {
+                padding: 5rem 1.5rem 6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h1 small {
+                font-size: 1rem;
+                letter-spacing: 1.5px;
+            }
+
+            .hero p {
+                font-size: 1.05rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-intro {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-item .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .academic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                gap: 1.5rem;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-timeline::before {
+                display: none;
+            }
+
+            .timeline-dot {
+                position: relative;
+                right: auto;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-card {
+                width: 100%;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+>>>>>>> origin/main
         }
 
         /* Reveal Class */
@@ -569,10 +1271,22 @@
 
     <!-- Hero Section -->
     <section class="hero">
+<<<<<<< HEAD
         <div class="hero-bg-shape shape-1"></div>
         <div class="hero-bg-shape shape-2"></div>
 
         <div class="hero-content">
+=======
+        <div class="video-background">
+            <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1920&auto=format&fit=crop"
+                alt="Sea of Galilee View">
+        </div>
+        <div class="hero-overlay"></div>
+        <canvas id="particles-canvas"></canvas>
+
+        <div class="hero-content" id="heroContent">
+            <div class="hero-badge">עמק הירדן, ליד הכנרת</div>
+>>>>>>> origin/main
             <h1>בית ירח <small>Beit Yerach High School</small></h1>
             <p>חינוך מעולה ליד המים היפים של הכנרת. המקום בו חדשנות פוגשת מסורת, ומצוינות היא דרך חיים.</p>
 
@@ -589,6 +1303,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- About Section (Bento Box) -->
     <section id="about">
         <div class="section-header reveal">
@@ -621,6 +1336,223 @@
             <div class="bento-card bento-small reveal">
                 <h3>קהילה</h3>
                 <p>קשר חם ואישי בין מורים לתלמידים.</p>
+=======
+    <!-- ===================== ABOUT SECTION ===================== -->
+    <section id="about">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <span class="section-label">מי אנחנו (באמת)</span>
+                <h2 class="section-title">אודות בית ירח</h2>
+                <p class="section-subtitle">בית ספר תיכון שבו הכנרת היא לוח המודעות, השמש היא השעון, והטבע הוא המורה הכי ותיק</p>
+            </div>
+
+            <!-- Intro Grid -->
+            <div class="about-intro">
+                <div class="about-text reveal-right">
+                    <p class="lead">בית ירח היא לא סתם בית ספר - היא מקום שבו תלמידים מגלים מי הם באמת, ליד אגם שקיים כבר כמה אלפי שנים (אז כן, הוא ראה הכל).</p>
+                    <p>אנחנו משלבים בין לימודים ברמה הגבוהה ביותר לבין חוויות שטח ייחודיות. כי בואו נודה - קשה להתעלם מהנוף כשהמעבדה שלך נמצאת ליד ים של גליל.</p>
+                    <div class="about-highlight">
+                        <p><strong>הפילוסופיה שלנו:</strong> חינוך צריך לפתוח חלונות, לא לסגור דלתות. אנחנו מאמינים שתלמיד שלומד בסביבה מעוררת השראה - לומד פי שניים. ותלמיד שרואה את הכנרת מהחלון - פשוט לא רוצה לברוח מהשיעור.</p>
+                    </div>
+                    <p>ממוקמים על גבעה המשקיפה אל הכנרת, אנחנו מעניקים לתלמידים חוויה חינוכית שממזגת בין חוכמה עתיקה לחדשנות מודרנית. זה כמו לשלב את ויקיפדיה עם טיול שנתי - רק שאצלנו זה כל יום.</p>
+                </div>
+                <div class="about-visual reveal-left">
+                    <div class="about-visual-card">
+                        <h3>המספרים מדברים</h3>
+                        <p class="subtitle">(ואנחנו לא ממציאים אותם)</p>
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="30">0</span>
+                                <span class="stat-label">שנות ניסיון</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="95">0</span>
+                                <span class="stat-label">% הצלחה בבגרות</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="50">0</span>
+                                <span class="stat-label">מורים מקצועיים</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="12">0</span>
+                                <span class="stat-label">מגמות לימוד</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fun Facts Marquee -->
+            <div class="about-funfacts-wrapper">
+                <div class="funfacts-track" id="funfactsTrack">
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌊</span>
+                        <h4>5 דקות מהכנרת</h4>
+                        <p>המרחק מבית הספר לחוף. יש מי שטוענים שזה יתרון אקדמי. אנחנו לא מתווכחים.</p>
+                        <div class="funfact-punchline">הנוף שווה יותר מאלף מילים במבחן</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌡️</span>
+                        <h4>300 ימי שמש בשנה</h4>
+                        <p>בעוד שאר הארץ מתלוננת על הגשם, אנחנו בחוץ לומדים בטבע. שמש = אנרגיה = ציונים טובים (בערך).</p>
+                        <div class="funfact-punchline">ויטמין D חינם לכל תלמיד</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🐟</span>
+                        <h4>שיעור ביולוגיה חי</h4>
+                        <p>למה ללמוד על דגים מספר כשאפשר לראות אותם לייב? מעבדת הטבע שלנו היא הכנרת כולה.</p>
+                        <div class="funfact-punchline">אמנון ודג הפיטר מלמדים אנטומיה</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏔️</span>
+                        <h4>210 מטר מתחת לפני הים</h4>
+                        <p>אנחנו הבית ספר הכי נמוך בעולם (גאוגרפית). אבל הציונים? אלה גבוהים.</p>
+                        <div class="funfact-punchline">הנמוכים ביותר עם השאיפות הגבוהות ביותר</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏛️</span>
+                        <h4>5,000 שנות היסטוריה</h4>
+                        <p>בית ירח הוא אתר ארכיאולוגי מתקופת הברונזה הקדומה. ההיסטוריה ממש מתחת לרגליים.</p>
+                        <div class="funfact-punchline">שיעורי היסטוריה שאפשר לחפור בהם. ממש</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🧪</span>
+                        <h4>3 מעבדות מתקדמות</h4>
+                        <p>כימיה, פיזיקה וביוטכנולוגיה. כל מה שצריך כדי לגלות שמדע זה בעצם מגניב.</p>
+                        <div class="funfact-punchline">פיצוצים מבוקרים בלבד, אנחנו מבטיחים</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🚴</span>
+                        <h4>מסלול אופניים צמוד</h4>
+                        <p>שביל האופניים סביב הכנרת עובר ממש ליד. שיעור ספורט = רכיבה עם נוף.</p>
+                        <div class="funfact-punchline">ציון 100 בספורט כולל שיזוף</div>
+                    </div>
+                    <!-- Duplicated for seamless loop -->
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌊</span>
+                        <h4>5 דקות מהכנרת</h4>
+                        <p>המרחק מבית הספר לחוף. יש מי שטוענים שזה יתרון אקדמי. אנחנו לא מתווכחים.</p>
+                        <div class="funfact-punchline">הנוף שווה יותר מאלף מילים במבחן</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌡️</span>
+                        <h4>300 ימי שמש בשנה</h4>
+                        <p>בעוד שאר הארץ מתלוננת על הגשם, אנחנו בחוץ לומדים בטבע. שמש = אנרגיה = ציונים טובים (בערך).</p>
+                        <div class="funfact-punchline">ויטמין D חינם לכל תלמיד</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🐟</span>
+                        <h4>שיעור ביולוגיה חי</h4>
+                        <p>למה ללמוד על דגים מספר כשאפשר לראות אותם לייב? מעבדת הטבע שלנו היא הכנרת כולה.</p>
+                        <div class="funfact-punchline">אמנון ודג הפיטר מלמדים אנטומיה</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏔️</span>
+                        <h4>210 מטר מתחת לפני הים</h4>
+                        <p>אנחנו הבית ספר הכי נמוך בעולם (גאוגרפית). אבל הציונים? אלה גבוהים.</p>
+                        <div class="funfact-punchline">הנמוכים ביותר עם השאיפות הגבוהות ביותר</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏛️</span>
+                        <h4>5,000 שנות היסטוריה</h4>
+                        <p>בית ירח הוא אתר ארכיאולוגי מתקופת הברונזה הקדומה. ההיסטוריה ממש מתחת לרגליים.</p>
+                        <div class="funfact-punchline">שיעורי היסטוריה שאפשר לחפור בהם. ממש</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🧪</span>
+                        <h4>3 מעבדות מתקדמות</h4>
+                        <p>כימיה, פיזיקה וביוטכנולוגיה. כל מה שצריך כדי לגלות שמדע זה בעצם מגניב.</p>
+                        <div class="funfact-punchline">פיצוצים מבוקרים בלבד, אנחנו מבטיחים</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🚴</span>
+                        <h4>מסלול אופניים צמוד</h4>
+                        <p>שביל האופניים סביב הכנרת עובר ממש ליד. שיעור ספורט = רכיבה עם נוף.</p>
+                        <div class="funfact-punchline">ציון 100 בספורט כולל שיזוף</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="about-timeline reveal">
+                <div class="section-header">
+                    <span class="section-label">ציר הזמן</span>
+                    <h2 class="section-title" style="font-size: 2rem;">הסיפור שלנו</h2>
+                    <p class="section-subtitle">מהתחלה צנועה ועד היום - הדרך הייתה שווה כל רגע</p>
+                </div>
+
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">1994</span>
+                        <h4>הקמת בית הספר</h4>
+                        <p>קבוצה של אנשי חינוך חלמה על בית ספר ליד הכנרת. כולם אמרו להם "אתם משוגעים". הם הסכימו - והמשיכו.</p>
+                        <div class="timeline-joke">להיות משוגע זו דרישת סף למורים אצלנו</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2003</span>
+                        <h4>הרחבת הקמפוס</h4>
+                        <p>בניין חדש, מעבדות מודרניות, ומגרש ספורט עם נוף לכנרת. סוף סוף מקום לשים את כל החלומות.</p>
+                        <div class="timeline-joke">המעבדה החדשה הריחה טוב. לשבוע</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2015</span>
+                        <h4>מצוינות אקדמית</h4>
+                        <p>בית ירח הוכר כאחד מבתי הספר המובילים בצפון. 95% הצלחה בבגרות - ולא בגלל שהשאלות היו קלות.</p>
+                        <div class="timeline-joke">התעודות שלנו לא נכתבות בעיפרון</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2024</span>
+                        <h4>חדשנות טכנולוגית</h4>
+                        <p>מגמת סייבר, AI ורובוטיקה. כי אם כבר להכין תלמידים לעתיד - אז לעתיד האמיתי, לא זה מהסרטים.</p>
+                        <div class="timeline-joke">הרובוטים עדיין לא מחליפים את המורים. עדיין</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Us -->
+            <div class="about-why-us reveal">
+                <h3>למה דווקא בית ירח?</h3>
+                <p class="why-subtitle">כי יש הבדל בין ללמוד לבין לחיות את הלמידה</p>
+                <div class="why-grid stagger-children">
+                    <div class="why-card">
+                        <span class="why-icon">🏖️</span>
+                        <h4>מיקום שלא משעמם</h4>
+                        <p>בזמן שבתי ספר אחרים מראים תמונות של טבע - אנחנו פשוט פותחים חלון. הכנרת, הגולן, עמק הירדן - הכל בהישג יד.</p>
+                        <div class="why-joke">התלמידים באים בשביל הלימודים. נשארים בשביל הנוף</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🧠</span>
+                        <h4>חינוך שמתאים לך</h4>
+                        <p>12 מגמות לימוד, מסלולים מותאמים אישית, והצוות הפדגוגי שלנו מכיר כל תלמיד בשם (ובתחביבים).</p>
+                        <div class="why-joke">אם התעצלת בשיעורים - נדע. אנחנו רואים הכל</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🤝</span>
+                        <h4>קהילה אמיתית</h4>
+                        <p>זה לא סתם בית ספר - זו משפחה. עם כל הריבים, האהבה והאוכל הביתי של ההורים באירועים.</p>
+                        <div class="why-joke">כמו משפחה רגילה, רק עם יותר מבחנים</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🚀</span>
+                        <h4>הכנה לעתיד</h4>
+                        <p>מגמות טכנולוגיה, סדנאות יזמות, ופרויקטים אמיתיים. כשתלמידים שלנו מגיעים לצבא/אוניברסיטה - הם מוכנים.</p>
+                        <div class="why-joke">הבוגרים שלנו לא מפחדים מאקסלים. או מחיים</div>
+                    </div>
+                </div>
+>>>>>>> origin/main
             </div>
         </div>
     </section>
@@ -696,6 +1628,64 @@
         </div>
     </section>
 
+<<<<<<< HEAD
+=======
+    <!-- Community Section -->
+    <section id="community">
+        <div class="section-header reveal">
+            <span class="section-label">קהילה</span>
+            <h2 class="section-title">הקהילה שלנו</h2>
+            <p class="section-subtitle">בית ירח היא יותר מבית ספר - היא משפחה</p>
+        </div>
+        <div class="community-grid stagger-children">
+            <div class="community-card">
+                <span class="card-icon">👨‍🎓</span>
+                <h3>הסטודנטים</h3>
+                <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ. מקום שבו הם יכולים להיות עצמם, לצמוח ולהתפתח.</p>
+            </div>
+            <div class="community-card">
+                <span class="card-icon">👩‍🏫</span>
+                <h3>הצוות הפדגוגי</h3>
+                <p>מחנכות ומחנכים מנוסים שמאמינים בכל תלמיד ומובילים אותם להצלחה.</p>
+            </div>
+            <div class="community-card">
+                <span class="card-icon">👨‍👩‍👧‍👦</span>
+                <h3>משפחות וחברה</h3>
+                <p>הורים תומכים וקשרים עם הקהילה המקומית. בית ירח היא משפחה שנבנתה על בסיס ערכים.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="full-width">
+        <div class="contact-content">
+            <div class="section-header reveal">
+                <span class="section-label">דברו איתנו</span>
+                <h2 class="section-title">יצירת קשר</h2>
+                <p class="section-subtitle">נשמח לענות על כל שאלה ולעזור לכם להכיר את בית ירח</p>
+            </div>
+            <div class="contact-info stagger-children">
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <h3>כתובת</h3>
+                    <p>עמק הירדן<br>סמוך לכנרת (ים של גליל)<br>ישראל</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <h3>טלפון</h3>
+                    <p>+972 (0)4-XXX-XXXX<br>לתלמידים חדשים<br>שעות: ראשון-חמישי</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <h3>דוא״ל</h3>
+                    <p>info@beityerach.edu.il<br>admissions@beityerach.edu.il<br>לבדיקות קבלה</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+>>>>>>> origin/main
     <footer>
         <ul class="footer-links">
             <li><a href="#about">אודות</a></li>
@@ -704,13 +1694,161 @@
         </ul>
         <p>&copy; 2026 בית ירח | כל הזכויות שמורות</p>
     </footer>
+<<<<<<< HEAD
+=======
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="חזרה למעלה">&#8593;</button>
+>>>>>>> origin/main
 
     <script>
         // Reveal on Scroll
         const revealElements = document.querySelectorAll('.reveal');
 
+<<<<<<< HEAD
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+=======
+        // ===== LOADER =====
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // ===== CANVAS PARTICLES =====
+        var canvas = document.getElementById('particles-canvas');
+        var ctx = canvas.getContext('2d');
+        var pWidth, pHeight;
+        var particlesArray = [];
+
+        function resizeCanvas() {
+            var hero = document.querySelector('.hero');
+            if (hero) {
+                pWidth = hero.offsetWidth;
+                pHeight = hero.offsetHeight;
+            } else {
+                pWidth = window.innerWidth;
+                pHeight = window.innerHeight;
+            }
+            canvas.width = pWidth;
+            canvas.height = pHeight;
+        }
+
+        function Particle() {
+            this.x = Math.random() * pWidth;
+            this.y = Math.random() * pHeight;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.4 - 0.2;
+            this.speedY = Math.random() * 0.4 - 0.2;
+            this.opacity = Math.random() * 0.5 + 0.3;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > pWidth) this.x = 0;
+            if (this.x < 0) this.x = pWidth;
+            if (this.y > pHeight) this.y = 0;
+            if (this.y < 0) this.y = pHeight;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + this.opacity + ')';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        };
+
+        function initParticles() {
+            resizeCanvas();
+            particlesArray = [];
+            for (var i = 0; i < 80; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, pWidth, pHeight);
+            for (var i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+
+        // ===== NAVBAR SCROLL EFFECT =====
+        var navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== ACTIVE NAV LINK =====
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('nav .nav-links a, .mobile-menu-overlay a');
+
+        function updateActiveLink() {
+            var scrollPos = window.pageYOffset + 200;
+            sections.forEach(function(section) {
+                var top = section.offsetTop;
+                var height = section.offsetHeight;
+                var id = section.getAttribute('id');
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+
+        // ===== HAMBURGER MENU =====
+        var hamburger = document.getElementById('hamburger');
+        var mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ===== HERO CONTENT ANIMATION =====
+        setTimeout(function() {
+            document.getElementById('heroContent').classList.add('visible');
+        }, 900);
+
+        // ===== SCROLL REVEAL (Intersection Observer) =====
+        var revealElements = document.querySelectorAll('.reveal, .reveal-right, .reveal-left, .stagger-children');
+
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+>>>>>>> origin/main
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
@@ -731,17 +1869,70 @@
             });
         });
 
+<<<<<<< HEAD
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
                 nav.style.background = 'rgba(13, 58, 74, 0.95)';
                 nav.style.padding = '0.8rem 3rem';
+=======
+        function animateCounter(el) {
+            var target = parseInt(el.getAttribute('data-target'));
+            var duration = 2000;
+            var startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = Math.floor(eased * target);
+                el.textContent = current;
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        // ===== BACK TO TOP =====
+        var backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 500) {
+                backToTop.classList.add('visible');
+>>>>>>> origin/main
             } else {
                 nav.style.background = 'rgba(13, 58, 74, 0.85)';
                 nav.style.padding = '1rem 3rem';
             }
         });
+<<<<<<< HEAD
+=======
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href');
+                var targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    var offset = 80;
+                    var targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPos, behavior: 'smooth' });
+                }
+            });
+        });
+
+    })();
+>>>>>>> origin/main
     </script>
 </body>
 
