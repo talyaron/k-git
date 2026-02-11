@@ -1,0 +1,38 @@
+#academics {
+  background: linear-gradient(135deg, #f9fbff 0%, #f5f1e8 100%);
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#academics .section-title {
+  position: relative;
+  padding-right: 2rem;
+}
+
+#academics .section-title::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lake-blue), var(--light-blue));
+}
+
+.academic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  #academics {
+    padding: 3rem 1rem;
+  }
+
+  #academics .section-title {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,28 @@
+.activity-item {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(124, 200, 227, 0.05), rgba(45, 122, 74, 0.05));
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  direction: rtl;
+}
+
+.activity-item:hover {
+  transform: scale(1.05);
+}
+
+.activity-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.activity-item h3 {
+  color: var(--lake-blue);
+  margin-bottom: 0.5rem;
+}
+
+.activity-item p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}

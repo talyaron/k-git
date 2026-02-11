@@ -1,0 +1,42 @@
+#contact {
+  background: linear-gradient(135deg, #1a5f7a 0%, #0d3a4a 100%);
+  color: white;
+  text-align: center;
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#contact .section-title {
+  color: white;
+  position: relative;
+  padding-right: 2rem;
+}
+
+#contact .section-title::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--light-blue), var(--accent));
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  #contact {
+    padding: 3rem 1rem;
+  }
+
+  #contact .section-title {
+    font-size: 1.8rem;
+  }
+}
