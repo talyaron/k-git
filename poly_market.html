@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG-Poly | Anti-Gravity Markets</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #bc13fe;
+            --neon-green: #0aff0a;
+            --void-dark: #050510;
+            --void-light: #0d0d25;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --danger: #ff0055;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-cyan) var(--void-dark);
+        }
+
+        body {
+            background-color: var(--void-dark);
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(188, 19, 254, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 25%);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* Utility & Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .text-cyan {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .text-pink {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+        }
+
+        .text-green {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(10, 255, 10, 0.5);
+        }
+
+        /* Layout */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header / HUD */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hud-stats {
+            display: flex;
+            gap: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+
+        .stat-box {
+            text-align: right;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron';
+        }
+
+        /* Black Hole Mechanic */
+        .black-hole-container {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            pointer-events: none;
+            /* Let clicks pass through except buttons */
+        }
+
+        .black-hole {
+            width: 100px;
+            /* Base size, will scale with content */
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: black;
+            box-shadow:
+                0 0 20px var(--neon-pink),
+                0 0 60px var(--neon-cyan),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-hole 4s infinite ease-in-out;
+            position: relative;
+            z-index: 0;
+        }
+
+        @keyframes pulse-hole {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px var(--neon-pink), 0 0 60px var(--neon-cyan);
+            }
+
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 30px var(--neon-pink), 0 0 80px var(--neon-cyan);
+            }
+        }
+
+        /* Action Buttons */
+        .btn {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Rajdhani';
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        .btn-burn {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .btn-burn:hover {
+            background: var(--danger);
+            color: #fff;
+            box-shadow: 0 0 30px var(--danger);
+        }
+
+        /* Floating Cards Grid */
+        .market-verse {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4rem;
+            padding: 2rem 0;
+            min-height: 60vh;
+            align-items: flex-start;
+            /* Important for variable float heights */
+        }
+
+        .market-card {
+            width: 380px;
+            background: rgba(13, 13, 37, 0.7);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            animation: float-anim 6s ease-in-out infinite;
+            /* Box shadow for depth */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Heavier cards (more liqudity) sink lower */
+        .market-card.heavy {
+            animation-duration: 8s;
+            margin-top: 100px;
+            border-color: rgba(188, 19, 254, 0.5);
+        }
+
+        .market-card.light {
+            animation-duration: 4s;
+            margin-top: 0px;
+            border-color: rgba(0, 243, 255, 0.5);
+        }
+
+        .market-card:hover {
+            transform: scale(1.05) translateZ(20px);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            z-index: 100;
+        }
+
+        @keyframes float-anim {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .market-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Liquidity Visualizer */
+        .liquidity-tank {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            margin: 1rem 0;
+        }
+
+        .liquid-bar {
+            height: 100%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Outcomes */
+        .outcome-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .outcome-row:hover {
+            background: rgba(0, 243, 255, 0.05);
+            border-color: rgba(0, 243, 255, 0.3);
+        }
+
+        .outcome-name {
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .outcome-odds {
+            font-family: 'Orbitron';
+            color: var(--neon-cyan);
+            z-index: 2;
+        }
+
+        /* Neon Pulse Interaction */
+        .btn-bet {
+            width: 100%;
+            margin-top: 1rem;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: none;
+            /* Hidden by default */
+        }
+
+        .market-card:hover .btn-bet {
+            display: block;
+            animation: slideUp 0.3s;
+        }
+
+        /* Trash Talk Feed (Side) */
+        .trash-talk-feed {
+            background: rgba(0, 0, 0, 0.4);
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            border-left: 2px solid var(--neon-pink);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .market-card.expanded .trash-talk-feed {
+            display: block;
+        }
+
+        .chat-msg {
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.2rem;
+        }
+
+        .chat-user {
+            color: var(--neon-pink);
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        /* Oracle Badge */
+        .oracle-status {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--neon-green);
+            color: black;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px var(--neon-green);
+            transform: rotate(5deg);
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal for Creating Market */
+        .glass-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(5, 5, 16, 0.95);
+            border: 1px solid var(--neon-cyan);
+            padding: 2rem;
+            width: 500px;
+            z-index: 1000;
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+            display: none;
+        }
+
+        .glass-modal.active {
+            display: block;
+            animation: fadeIn 0.2s;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: white;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Rajdhani';
+        }
+
+        input:focus {
+            border-color: var(--neon-cyan);
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="backdrop" id="backdrop" onclick="closeModals()"></div>
+
+    <!-- Create Market Modal -->
+    <div id="createModal" class="glass-modal">
+        <h2 class="text-cyan" style="margin-bottom: 1.5rem;">Initialize New Event</h2>
+        <input type="text" id="newQuestion" placeholder="Prediction Query (e.g. Will Isaac say 67?)">
+        <input type="text" id="newOutcomes" placeholder="Outcomes (comma separated: Yes, No, Maybe)">
+        <div style="display:flex; justify-content:flex-end; gap:1rem;">
+            <button class="btn" style="border-color:#555; color:#888;" onclick="closeModals()">Abort</button>
+            <button class="btn" onclick="publishMarket()">Deploy Market</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+
+        <!-- Header -->
+        <header>
+            <div class="logo">AG<span class="text-cyan">_</span>POLY</div>
+
+            <div class="black-hole-container" style="pointer-events: auto;">
+                <div class="black-hole">
+                    <div style="position:absolute; color:white; font-weight:900; z-index:2;">VOID<br><span id="voidPot"
+                            class="text-pink text-glow">$0</span></div>
+                </div>
+                <button class="btn btn-burn" style="margin-top:1rem; font-size:0.7rem; padding:0.4rem 1rem;"
+                    onclick="burnForLuck()">Burn 10% (Luck)</button>
+            </div>
+
+            <div class="hud-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Net Worth</div>
+                    <div class="stat-value text-green" id="userBalance">$1000</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Active Bets</div>
+                    <div class="stat-value text-cyan" id="activeBetsCount">0</div>
+                </div>
+                <button class="btn" onclick="openCreateModal()">+ Create</button>
+            </div>
+        </header>
+
+        <!-- Main Market Grid -->
+        <div id="marketVerse" class="market-verse">
+            <!-- Cards injected via JS -->
+        </div>
+
+    </div>
+
+    <script>
+        // --- Game State ---
+        const DEFAULT_MARKETS = [
+            {
+                id: 1,
+                question: "Will Isaac say '67' by Friday?",
+                outcomes: [
+                    { id: 'o1', name: "YES", pool: 450, color: 'var(--neon-green)' },
+                    { id: 'o2', name: "NO", pool: 120, color: 'var(--danger)' }
+                ],
+                totalPool: 570,
+                chat: [
+                    { user: "CryptoKing", text: "Free money on YES." },
+                    { user: "Skeptic", text: "No way, he hates that number." }
+                ],
+                resolved: false,
+                highRisk: false
+            },
+            {
+                id: 2,
+                question: "Will the server crash during the demo?",
+                outcomes: [
+                    { id: 'o3', name: "CRASH", pool: 50, color: 'var(--danger)' },
+                    { id: 'o4', name: "STABLE", pool: 800, color: 'var(--neon-cyan)' }
+                ],
+                totalPool: 850,
+                chat: [],
+                resolved: false,
+                highRisk: true
+            }
+        ];
+
+        let state = {
+            markets: JSON.parse(localStorage.getItem('ag-markets')) || DEFAULT_MARKETS,
+            balance: parseFloat(localStorage.getItem('ag-balance')) || 1000,
+            voidPot: parseFloat(localStorage.getItem('ag-void')) || 1250,
+            myBets: JSON.parse(localStorage.getItem('ag-bets')) || []
+        };
+
+        // --- Core Functions ---
+
+        function saveState() {
+            localStorage.setItem('ag-markets', JSON.stringify(state.markets));
+            localStorage.setItem('ag-balance', state.balance);
+            localStorage.setItem('ag-void', state.voidPot);
+            localStorage.setItem('ag-bets', JSON.stringify(state.myBets));
+            render();
+        }
+
+        function render() {
+            document.getElementById('userBalance').innerText = '$' + state.balance.toFixed(0);
+            document.getElementById('voidPot').innerText = '$' + state.voidPot.toFixed(0);
+            document.getElementById('activeBetsCount').innerText = state.myBets.length;
+
+            const verse = document.getElementById('marketVerse');
+            verse.innerHTML = '';
+
+            state.markets.forEach(m => {
+                // Physics Calculation: Heavier pool = More margin-top (sinks) + slower float animation
+                const weightClass = m.totalPool > 500 ? 'heavy' : 'light';
+                const pulseSpeed = m.highRisk ? '0.5s' : '0s'; // High risk bets pulse faster (visualized via border or glow)
+
+                // Outcomes HTML
+                let outcomesHtml = '';
+                m.outcomes.forEach(o => {
+                    const pct = ((o.pool / m.totalPool) * 100).toFixed(1);
+                    const mult = (1 / (o.pool / m.totalPool)).toFixed(2);
+
+                    outcomesHtml += `
+                        <div class="outcome-row" onclick="placeBet(${m.id}, '${o.id}')">
+                            <div class="outcome-name" style="color:${o.color}">${o.name}</div>
+                            <div class="outcome-odds">${mult}x <span style="font-size:0.7em; opacity:0.7;">(${pct}%)</span></div>
+                            <div style="position:absolute; bottom:0; left:0; height:2px; background:${o.color}; width:${pct}%"></div>
+                        </div>
+                    `;
+                });
+
+                // Chat HTML
+                let chatHtml = m.chat.map(c =>
+                    `<div class="chat-msg"><span class="chat-user">${c.user}:</span> ${c.text}</div>`
+                ).join('');
+
+                const card = document.createElement('div');
+                card.className = `market-card ${weightClass}`;
+                if (m.highRisk) card.style.borderColor = 'var(--danger)';
+
+                card.innerHTML = `
+                    ${m.resolved ? '<div class="oracle-status">ORACLE VERIFIED</div>' : ''}
+                    <div class="card-header">
+                        <div class="market-question">${m.question}</div>
+                        <div style="font-size:0.8rem; color:#666;">POOL: $${m.totalPool}</div>
+                    </div>
+                    
+                    <!-- Liquidity Bar Visual -->
+                    <div class="liquidity-tank">
+                        ${m.outcomes.map(o => `
+                            <div class="liquid-bar" style="width:${(o.pool / m.totalPool) * 100}%; background:${o.color};"></div>
+                        `).join('')}
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        ${outcomesHtml}
+                    </div>
+
+                    <div style="margin-top:auto;">
+                        <button class="btn-bet" onclick="toggleTrashTalk(this)">Show Comms & Oracle</button>
+                        <div class="trash-talk-feed">
+                            <div style="margin-bottom:0.5rem; color:#fff; font-weight:bold;">COMMUNICATIONS</div>
+                            <div class="msgs" style="margin-bottom:0.5rem;">${chatHtml}</div>
+                            <input type="text" placeholder="Trash talk..." onkeydown="handleChat(event, ${m.id})">
+                            
+                            <div style="margin-top:1rem; border-top:1px dashed #333; padding-top:0.5rem;">
+                                <div style="font-size:0.7rem; color: #888; margin-bottom:0.5rem;">ORACLE ACTIONS (ADMIN)</div>
+                                <div style="display:flex; gap:0.5rem;">
+                                    <button onclick="resolveMarket(${m.id}, true)" style="flex:1; background:var(--neon-green); border:none; color:black; font-weight:bold; cursor:pointer;">YES</button>
+                                    <button onclick="resolveMarket(${m.id}, false)" style="flex:1; background:var(--danger); border:none; color:white; font-weight:bold; cursor:pointer;">NO</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                verse.appendChild(card);
+            });
+        }
+
+        // --- Interaction Functions ---
+
+        function placeBet(marketId, outcomeId) {
+            const amount = prompt("Enter bet amount (Anti-Gravity Credits):", "50");
+            const val = parseFloat(amount);
+
+            if (!val || val <= 0) return;
+            if (val > state.balance) return alert("Insufficient funds for this timeline.");
+
+            state.balance -= val;
+
+            const market = state.markets.find(m => m.id === marketId);
+            const outcome = market.outcomes.find(o => o.id === outcomeId);
+
+            outcome.pool += val;
+            market.totalPool += val;
+
+            state.myBets.push({
+                mid: marketId,
+                oid: outcomeId,
+                amt: val,
+                ts: Date.now()
+            });
+
+            // 5% goes to Void Pot (Black Hole)
+            const tax = val * 0.05;
+            state.voidPot += tax;
+
+            saveState();
+        }
+
+        function toggleTrashTalk(btn) {
+            const card = btn.closest('.market-card');
+            card.classList.toggle('expanded');
+            btn.innerText = card.classList.contains('expanded') ? "Hide Comms" : "Show Comms & Oracle";
+        }
+
+        function handleChat(e, mid) {
+            if (e.key === 'Enter') {
+                const text = e.target.value;
+                if (!text) return;
+
+                const market = state.markets.find(m => m.id === mid);
+                market.chat.push({ user: "Me", text: text });
+                e.target.value = '';
+                saveState();
+            }
+        }
+
+        function resolveMarket(mid, isYes) {
+            const market = state.markets.find(m => m.id === mid);
+            if (market.resolved) return alert("Market already collapsed to a single timeline.");
+
+            market.resolved = true;
+            // Simplified payout logic for demo:
+            // In a real app, we distributes pool to winners.
+            // Here we just mark it.
+            alert(`Oracle has spoken: ${isYes ? "YES" : "NO"} confirmed.`);
+            saveState();
+        }
+
+        // --- Black Hole Mechanic ---
+        function burnForLuck() {
+            if (confirm("Warning: Burning 10% of your credits may alter your luck (or just destroy money). Proceed?")) {
+                const burn = state.balance * 0.10;
+                state.balance -= burn;
+                state.voidPot += burn;
+                alert(`Burned $${burn.toFixed(0)} into the Void. The anomaly grows.`);
+                saveState();
+            }
+        }
+
+        // --- Modal Logic ---
+        function openCreateModal() {
+            document.getElementById('backdrop').classList.add('active');
+            document.getElementById('createModal').classList.add('active');
+        }
+
+        function closeModals() {
+            document.getElementById('backdrop').classList.remove('active');
+            document.getElementById('createModal').classList.remove('active');
+        }
+
+        function publishMarket() {
+            const q = document.getElementById('newQuestion').value;
+            const oStr = document.getElementById('newOutcomes').value;
+
+            if (!q || !oStr) return;
+
+            const outcomesArr = oStr.split(',').map((name, i) => ({
+                id: 'o' + Date.now() + i,
+                name: name.trim(),
+                pool: 100, // Initial seed
+                color: i % 2 === 0 ? 'var(--neon-green)' : 'var(--neon-pink)'
+            }));
+
+            const newM = {
+                id: Date.now(),
+                question: q,
+                outcomes: outcomesArr,
+                totalPool: outcomesArr.length * 100,
+                chat: [],
+                resolved: false,
+                highRisk: Math.random() > 0.8 // Random chance for black hole interaction
+            };
+
+            state.markets.unshift(newM);
+            closeModals();
+            saveState();
+        }
+
+        // Init
+        render();
+
+    </script>
+</body>
+
+</html>
