@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './Hero.css';
+import schoolImage from '../../assets/beit_yerach_school.png';
 
 export default function Hero() {
   const canvasRef = useRef(null);
@@ -70,8 +71,8 @@ export default function Hero() {
     <section className="hero">
       <div className="video-background">
         <img
-          src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1920&auto=format&fit=crop"
-          alt="Sea of Galilee View"
+          src={schoolImage}
+          alt="Beit Yerach School AI Generated"
         />
       </div>
       <div className="hero-overlay"></div>
