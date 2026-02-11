@@ -1,6 +1,7 @@
 import Navigation from './components/common/Navigation';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
+import History from './components/sections/History';
 import Academics from './components/sections/Academics';
 import Activities from './components/sections/Activities';
 import Community from './components/sections/Community';
@@ -14,6 +15,7 @@ function App() {
       <Navigation />
       <Hero />
       <About />
+      <History />
       <Academics />
       <Activities />
       <Community />

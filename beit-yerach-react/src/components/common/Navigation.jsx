@@ -3,6 +3,7 @@ import './Navigation.css';
 export default function Navigation() {
   const navLinks = [
     { href: '#about', text: 'אודות' },
+    { href: '#history', text: 'היסטוריה' },
     { href: '#academics', text: 'לימודים' },
     { href: '#activities', text: 'פעילויות' },
     { href: '#community', text: 'קהילה' },
