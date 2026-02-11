@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בית ירח - Beit Yerach High School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --lake-blue: #1a5f7a;
+            --sky-blue: #4a9fd8;
+            --light-blue: #7ec8e3;
+            --green: #2d7a4a;
+            --light-green: #5ba86b;
+            --cream: #f5f1e8;
+            --text-dark: #1a1a1a;
+            --accent: #d4a574;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--cream) 0%, #fafaf7 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background: rgba(26, 95, 122, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            background: linear-gradient(135deg, #2a7f9e 0%, #1a5f7a 50%, #0d3a4a 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(124, 200, 227, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 122, 74, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 small {
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            color: var(--light-blue);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 2rem 0 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+            border: 2px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.4);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-right: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--lake-blue), var(--light-blue));
+        }
+
+        /* About Section */
+        #about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, rgba(74, 159, 216, 0.1), rgba(45, 122, 74, 0.1));
+            padding: 2rem;
+            border-right: 4px solid var(--lake-blue);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .about-highlight strong {
+            color: var(--lake-blue);
+        }
+
+        /* Academics Section */
+        #academics {
+            background: linear-gradient(135deg, #f9fbff 0%, #f5f1e8 100%);
+        }
+
+        .academic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .academic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--sky-blue);
+        }
+
+        .academic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .academic-card h3 {
+            color: var(--lake-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .academic-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Activities Section */
+        #activities {
+            background: white;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(124, 200, 227, 0.05), rgba(45, 122, 74, 0.05));
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .activity-item:hover {
+            transform: scale(1.05);
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item h3 {
+            color: var(--lake-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Community Section */
+        #community {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f5f1e8 100%);
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .community-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .community-card h3 {
+            color: var(--green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .community-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #1a5f7a 0%, #0d3a4a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        #contact .section-title::after {
+            background: linear-gradient(90deg, var(--light-blue), var(--accent));
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .contact-item p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a2a37;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero h1 small {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero {
+                margin-top: 120px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">בית ירח</div>
+        <ul class="nav-links">
+            <li><a href="#about">אודות</a></li>
+            <li><a href="#academics">לימודים</a></li>
+            <li><a href="#activities">פעילויות</a></li>
+            <li><a href="#community">קהילה</a></li>
+            <li><a href="#contact">יצירת קשר</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>בית ירח <small>Beit Yerach High School</small></h1>
+            <p>חינוך מעולה ליד המים היפים של כנרת, בעמק הירדן</p>
+            <a href="#about" class="cta-button">גלה עוד</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">אודות בית ירח</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>בית ירח היא בית ספר תיכון מובנה המוקדש לחינוך איכותי במקום המיוחד של עמק הירדן, סמוך לכנרת. המכללה משלבת בין לימודים מתקדמים ופעילויות חברתיות באמצע הטבע.</p>
+                <div class="about-highlight">
+                    <p><strong>תשומת לב:</strong> בתנובת בית הספר תושם דגש על פתיחת חלונות לעולם דרך חקר, טבע וחברה. תלמידינו לומדים בסביבה שמעורה משהו מיוחד ומשפיע.</p>
+                </div>
+                <p>ממוקמים על גבעה המשקיפה אל כנרת, אנחנו מעניקים לתלמידים חוויה חינוכית ייחודית הממזגת בין הלימודים העתיקים לחדשנות.</p>
+            </div>
+            <div class="about-highlight">
+                <h3 style="color: var(--lake-blue); margin-bottom: 1.5rem;">🌊 מיקום ייחודי</h3>
+                <p>סמוך לכנרת (ים של גליל)</p>
+                <p style="margin-top: 1rem; color: #777;">עמק הירדן היפה</p>
+                <p style="margin-top: 1.5rem; color: var(--lake-blue); font-weight: 600;">תלמידים מכל רחבי הארץ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics">
+        <h2 class="section-title">לימודים מעולים</h2>
+        <div class="academic-grid">
+            <div class="academic-card">
+                <h3>📚 מדעי הטבע</h3>
+                <p>חקר בעלי חיים, צומח ותופעות טבעיות בסביבה שלנו. שילוב בין תיאוריה לעבודה מעשית בשטח.</p>
+            </div>
+            <div class="academic-card">
+                <h3>🔬 מדעים וטכנולוגיה</h3>
+                <p>למידה מדעית מקדמת עם מעבדות מודרניות וציוד טכנולוגי. החוקרים יכולים לבחור בתבחני מתקדמים.</p>
+            </div>
+            <div class="academic-card">
+                <h3>🎓 מנהיגות ותיכנון</h3>
+                <p>פיתוח כישורים מנהיגותיים דרך פרויקטים קהילתיים, התנדבות וחירותים של עתיד.</p>
+            </div>
+            <div class="academic-card">
+                <h3>🌍 לימודי תרבות</h3>
+                <p>הבנת תיאום בין תרבויות, קריאה עמוקה של טקסטים וביטוי יצירתי דרך אומנות.</p>
+            </div>
+            <div class="academic-card">
+                <h3>💻 דיגיטל ותכנות</h3>
+                <p>אתרים, אפליקציות ובעיות חישוביות. למידה דרך עשייה במסגרת פרויקטים אמיתיים.</p>
+            </div>
+            <div class="academic-card">
+                <h3>🎨 אומנות וביטוי</h3>
+                <p>צילום, ציור, מוזיקה ותיאטרון. פתח את הכישרון שלך בתחום הבנתך.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities">
+        <h2 class="section-title">פעילויות וחוויות</h2>
+        <div class="activities-grid">
+            <div class="activity-item">
+                <div class="activity-icon">🏕️</div>
+                <h3>טיולים וקמפינג</h3>
+                <p>חוקרים את הטבע של הגליל בטיולים בשטח וקמפים הנוצרים זיכרונות של חיים.</p>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🏐</div>
+                <h3>ספורט וכושר</h3>
+                <p>כדורעף, כדורסל, הליכה, יוגה וטיולי אופניים לאורך הכנרת.</p>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🎭</div>
+                <h3>תיאטרון ותרבות</h3>
+                <p>קבוצות בימה, הצגות חיות ואירועי תרבות במהלך השנה.</p>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🤝</div>
+                <h3>התנדבות קהילתית</h3>
+                <p>פרויקטים צדקה, עזרה לקהילה מקומית ותרומה חברתית משמעותית.</p>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🎵</div>
+                <h3>מוזיקה ואומנות</h3>
+                <p>להקה, כור זמר, סדנאות אומנות וקונצרטים סטודנטים.</p>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🌱</div>
+                <h3>משמר וסביבה</h3>
+                <p>פרויקטים סביבתיים, גינת צמחי מרפא וקיימות ירוקה.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community">
+        <h2 class="section-title">הקהילה שלנו</h2>
+        <div class="community-grid">
+            <div class="community-card">
+                <h3>👨‍🎓 הסטודנטים</h3>
+                <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ, האם החדשנות וגם המסורת. מקום שהם יכולים להיות עצמם ולהתפתח.</p>
+            </div>
+            <div class="community-card">
+                <h3>👩‍🏫 הקבוצה הפדגוגית</h3>
+                <p>מחנכות וחינוכים מנוסים שמאמינים בכל סטודנט ויעבדו לפי המוקד שלהם ושלהם בהצלחה.</p>
+            </div>
+            <div class="community-card">
+                <h3>👨‍👩‍👧‍👦 משפחות וחברה</h3>
+                <p>הורים תומכים וקשרים עם הקהילה המקומית. בית ירח היא למעשה משפחה שנבנתה על בסיס ערכים מקדש.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">יצירת קשר</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📍 כתובת</h3>
+                <p>עמק הירדן<br>סמוך לכנרת (ים של גליל)<br>ישראל</p>
+            </div>
+            <div class="contact-item">
+                <h3>📞 טלפון</h3>
+                <p>+972 (0)4-XXX-XXXX<br>לתלמידים חדשים<br>שעות: ראשון-חמישי</p>
+            </div>
+            <div class="contact-item">
+                <h3>✉️ דוא״ל</h3>
+                <p>info@beityerach.edu.il<br>admissions@beityerach.edu.il<br>לבדיקות קבלה</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 בית ירח | Beit Yerach High School. כל הזכויות שמורות.</p>
+    </footer>
+</body>
+</html>
