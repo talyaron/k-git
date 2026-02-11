@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "c:\\Users\\stustu\\Documents\\k-git"
+    ],
+    "allow": [
+      "Bash(git clean:*)"
+    ]
+  }
+}
