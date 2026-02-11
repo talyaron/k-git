@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyMarket - K-Git Prediction Markets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #8b5cf6;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --card-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Create Market Form */
+        .create-market-panel {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--card-radius);
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+            /* Hidden by default */
+        }
+
+        .create-market-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .outcomes-list {
+            margin-bottom: 1rem;
+        }
+
+        .outcome-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Market Grid */
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .market-card {
+            background: var(--surface);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .market-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .market-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .market-outcomes {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .outcome-row {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .outcome-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .outcome-progress-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: rgba(99, 102, 241, 0.15);
+            z-index: 1;
+            transition: width 0.5s ease;
+        }
+
+        .outcome-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .outcome-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .outcome-stats {
+            text-align: right;
+        }
+
+        .outcome-prob {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .outcome-multiplier {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Betting Modal/Area */
+        .betting-area {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+
+        .betting-area.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .chip-balance {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <h1>PolyMarket</h1>
+                <span class="chip-balance">Balance: $<span id="userBalance">1000</span></span>
+            </div>
+            <button class="btn" onclick="toggleCreatePanel()">+ New Market</button>
+        </header>
+
+        <!-- Create Market Panel -->
+        <div id="createPanel" class="create-market-panel">
+            <h2 style="margin-bottom: 2rem;">Create New Prediction Market</h2>
+            <div class="form-group">
+                <label>Question</label>
+                <input type="text" id="marketQuestion" placeholder="e.g. What number will Isaac say by Friday?">
+            </div>
+
+            <div class="form-group">
+                <label>Outcomes</label>
+                <div id="outcomesContainer" class="outcomes-list">
+                    <div class="outcome-input-group">
+                        <input type="text" placeholder="Outcome 1 (e.g. Yes)" class="outcome-input">
+                    </div>
+                    <div class="outcome-input-group">
+                        <input type="text" placeholder="Outcome 2 (e.g. No)" class="outcome-input">
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="addOutcomeField()" style="font-size: 0.8rem;">+ Add
+                    Outcome</button>
+            </div>
+
+            <button class="btn" onclick="publishMarket()">Publish Market</button>
+        </div>
+
+        <!-- Markets Grid -->
+        <div id="marketsGrid" class="market-grid">
+            <!-- Markets will be injected here via JS -->
+        </div>
+
+        <!-- My Bets Section -->
+        <div id="myBetsPanel" class="market-card" style="margin-top: 3rem; border-color: var(--accent);">
+            <h2 style="margin-bottom: 1.5rem;">My Active Bets</h2>
+            <div id="myBetsList">
+                <!-- Bets injected here -->
+                <p style="color: var(--text-muted);">No active bets yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State Management
+        let markets = JSON.parse(localStorage.getItem('k-poly-markets')) || [
+            {
+                id: 1,
+                question: "What number will Isaac say by the end of the week?",
+                outcomes: [
+                    { id: 'o1', name: "67", pool: 100 },
+                    { id: 'o2', name: "42", pool: 50 },
+                    { id: 'o3', name: "Other", pool: 20 }
+                ],
+                totalPool: 170
+            }
+        ];
+
+        let userBalance = parseFloat(localStorage.getItem('k-poly-balance')) || 1000;
+        let myBets = JSON.parse(localStorage.getItem('k-poly-bets')) || [];
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            updateBalanceDisplay();
+            renderMarkets();
+            renderMyBets();
+        });
+
+        function saveData() {
+            localStorage.setItem('k-poly-markets', JSON.stringify(markets));
+            localStorage.setItem('k-poly-balance', userBalance.toString());
+            localStorage.setItem('k-poly-bets', JSON.stringify(myBets));
+            updateBalanceDisplay();
+            renderMarkets();
+            renderMyBets();
+        }
+
+        function updateBalanceDisplay() {
+            document.getElementById('userBalance').innerText = userBalance.toFixed(2);
+        }
+
+        function toggleCreatePanel() {
+            const panel = document.getElementById('createPanel');
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+                panel.classList.remove('active');
+            } else {
+                panel.style.display = 'block';
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => panel.classList.add('active'), 10);
+            }
+        }
+
+        function addOutcomeField() {
+            const container = document.getElementById('outcomesContainer');
+            const newGroup = document.createElement('div');
+            newGroup.className = 'outcome-input-group';
+            newGroup.innerHTML = `<input type="text" placeholder="Outcome ${container.children.length + 1}" class="outcome-input">`;
+            container.appendChild(newGroup);
+        }
+
+        function publishMarket() {
+            const question = document.getElementById('marketQuestion').value;
+            const outcomeInputs = document.querySelectorAll('.outcome-input');
+            const outcomes = [];
+
+            if (!question) {
+                alert('Please enter a question');
+                return;
+            }
+
+            outcomeInputs.forEach((input, index) => {
+                if (input.value.trim()) {
+                    outcomes.push({
+                        id: 'o' + Date.now() + Math.random().toString(36).substr(2, 5),
+                        name: input.value.trim(),
+                        pool: 50 // Initial liquidity
+                    });
+                }
+            });
+
+            if (outcomes.length < 2) {
+                alert('Please add at least 2 outcomes');
+                return;
+            }
+
+            const totalPool = outcomes.reduce((acc, curr) => acc + curr.pool, 0);
+
+            const newMarket = {
+                id: Date.now(),
+                question: question,
+                outcomes: outcomes,
+                totalPool: totalPool
+            };
+
+            markets.unshift(newMarket);
+            saveData();
+            toggleCreatePanel();
+
+            // Clear form
+            document.getElementById('marketQuestion').value = '';
+            document.getElementById('outcomesContainer').innerHTML = `
+                <div class="outcome-input-group"><input type="text" placeholder="Outcome 1" class="outcome-input"></div>
+                <div class="outcome-input-group"><input type="text" placeholder="Outcome 2" class="outcome-input"></div>
+            `;
+        }
+
+        function renderMarkets() {
+            const grid = document.getElementById('marketsGrid');
+            grid.innerHTML = '';
+
+            markets.forEach(market => {
+                const card = document.createElement('div');
+                card.className = 'market-card';
+
+                let outcomesHtml = '';
+                market.outcomes.forEach(outcome => {
+                    const probability = outcome.pool / market.totalPool;
+                    const percentage = (probability * 100).toFixed(1);
+                    const multiplier = (1 / probability).toFixed(2);
+
+                    outcomesHtml += `
+                        <div class="outcome-row" onclick="toggleBetting('${market.id}', '${outcome.id}')">
+                            <div class="outcome-progress-bg" style="width: ${percentage}%"></div>
+                            <div class="outcome-content">
+                                <span class="outcome-name">${outcome.name}</span>
+                                <div class="outcome-stats">
+                                    <div class="outcome-prob">${percentage}%</div>
+                                    <div class="outcome-multiplier">${multiplier}x Payout</div>
+                                </div>
+                            </div>
+                            <div id="bet-area-${market.id}-${outcome.id}" class="betting-area" onclick="event.stopPropagation()">
+                                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                                    <input type="number" id="input-${market.id}-${outcome.id}" placeholder="Bet Amount ($)" min="1" style="padding:0.5rem; flex:1;">
+                                    <button class="btn" style="background:var(--success);" onclick="placeBet(${market.id}, '${outcome.id}')">BET</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="market-question">${market.question}</div>
+                    <div class="market-outcomes">
+                        ${outcomesHtml}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleBetting(marketId, outcomeId) {
+            // Hide others
+            document.querySelectorAll('.betting-area').forEach(el => el.classList.remove('active'));
+            // Show this one
+            const area = document.getElementById(`bet-area-${marketId}-${outcomeId}`);
+            if (area) area.classList.add('active');
+        }
+
+        function placeBet(marketId, outcomeId) {
+            const input = document.getElementById(`input-${marketId}-${outcomeId}`);
+            const amount = parseFloat(input.value);
+
+            if (!amount || amount <= 0) return;
+            if (amount > userBalance) {
+                alert("Insufficient funds!");
+                return;
+            }
+
+            // Update user balance
+            userBalance -= amount;
+
+            // Update market pools
+            const market = markets.find(m => m.id == marketId);
+            const outcome = market.outcomes.find(o => o.id == outcomeId);
+
+            outcome.pool += amount;
+            market.totalPool += amount;
+
+            // Record bet
+            myBets.unshift({
+                id: Date.now(),
+                marketQuestion: market.question,
+                outcomeName: outcome.name,
+                amount: amount,
+                timestamp: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
+            });
+
+            saveData();
+            if (input) input.value = '';
+        }
+
+        function renderMyBets() {
+            const container = document.getElementById('myBetsList');
+            if (myBets.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted);">No active bets yet.</p>';
+                return;
+            }
+
+            let html = '';
+            myBets.forEach(bet => {
+                html += `
+                    <div style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:8px; margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:600; font-size:0.9rem; color:var(--text-muted);">${bet.marketQuestion}</div>
+                            <div style="font-size:1.1rem;">Bet on <span style="color:var(--primary); font-weight:700;">${bet.outcomeName}</span></div>
+                            <div style="font-size:0.8rem; color:var(--text-muted);">${bet.timestamp}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-weight:700; color:var(--success); font-size:1.2rem;">$${bet.amount}</div>
+                            <div style="font-size:0.8rem;">Invested</div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
