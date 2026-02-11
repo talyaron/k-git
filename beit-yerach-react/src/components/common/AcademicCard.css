@@ -1,5 +1,5 @@
 .academic-card {
-  background: white;
+  background: var(--bg-tertiary);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -8,9 +8,17 @@
   direction: rtl;
 }
 
+html.dark-mode .academic-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 .academic-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+html.dark-mode .academic-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .academic-card h3 {
@@ -20,7 +28,7 @@
 }
 
 .academic-card p {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: 0.95rem;
 }

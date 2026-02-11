@@ -5,4 +5,10 @@ footer.footer {
   padding: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   direction: rtl;
+  transition: all 0.3s ease;
+}
+
+html.dark-mode footer.footer {
+  background: #050f15;
+  border-top-color: rgba(255, 255, 255, 0.05);
 }

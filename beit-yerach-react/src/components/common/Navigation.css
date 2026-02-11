@@ -12,6 +12,12 @@ nav.nav {
   z-index: 1000;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   direction: rtl;
+  transition: background-color 0.3s ease;
+}
+
+html.dark-mode nav.nav {
+  background: rgba(10, 10, 10, 0.95);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .nav-logo {
@@ -52,6 +58,22 @@ nav.nav {
 
 .nav-links a:hover::after {
   width: 100%;
+}
+
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1) rotate(20deg);
+  color: var(--accent);
 }
 
 @media (max-width: 768px) {

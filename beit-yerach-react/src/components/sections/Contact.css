@@ -6,6 +6,11 @@
   max-width: 1200px;
   margin: 0 auto;
   direction: rtl;
+  transition: all 0.3s ease;
+}
+
+html.dark-mode #contact {
+  background: linear-gradient(135deg, #0d1f2d 0%, #051018 100%);
 }
 
 #contact .section-title {

@@ -1,6 +1,15 @@
+import { useState, useEffect } from 'react';
+import useDarkMode from '../../hooks/useDarkMode';
 import './Navigation.css';
 
 export default function Navigation() {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const navLinks = [
     { href: '#about', text: 'אודות' },
     { href: '#history', text: 'היסטוריה' },
@@ -9,6 +18,9 @@ export default function Navigation() {
     { href: '#community', text: 'קהילה' },
     { href: '#contact', text: 'יצירת קשר' },
   ];
+
+  // Prevent hydration mismatch
+  if (!mounted) return null;
 
   return (
     <nav className="nav">
@@ -19,6 +31,11 @@ export default function Navigation() {
             <a href={link.href}>{link.text}</a>
           </li>
         ))}
+        <li>
+          <button className="dark-mode-toggle" onClick={toggleDarkMode} title="Toggle dark mode">
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
+        </li>
       </ul>
     </nav>
   );

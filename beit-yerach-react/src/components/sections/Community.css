@@ -1,9 +1,10 @@
 #community {
-  background: linear-gradient(135deg, #e8f4f8 0%, #f5f1e8 100%);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   direction: rtl;
+  transition: background 0.3s ease;
 }
 
 #community .section-title {

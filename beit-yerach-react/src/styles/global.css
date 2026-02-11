@@ -5,6 +5,7 @@
 }
 
 :root {
+  /* Light Mode Colors */
   --lake-blue: #1a5f7a;
   --sky-blue: #4a9fd8;
   --light-blue: #7ec8e3;
@@ -13,6 +14,34 @@
   --cream: #f5f1e8;
   --text-dark: #1a1a1a;
   --accent: #d4a574;
+
+  /* Light Mode - Additional */
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #fafaf7;
+  --bg-tertiary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+html.dark-mode {
+  /* Dark Mode Colors */
+  --lake-blue: #4a9fd8;
+  --sky-blue: #7ec8e3;
+  --light-blue: #a8d5f0;
+  --green: #5ba86b;
+  --light-green: #7bc383;
+  --cream: #1a1a1a;
+  --text-dark: #e8e8e8;
+  --accent: #e8b366;
+
+  /* Dark Mode - Additional */
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #e8e8e8;
+  --text-secondary: #b0b0b0;
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 html,
@@ -20,12 +49,13 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--text-dark);
+  color: var(--text-primary);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
-  background: linear-gradient(135deg, var(--cream) 0%, #fafaf7 100%);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 @keyframes slideUp {

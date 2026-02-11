@@ -22,7 +22,7 @@
 }
 
 .activity-item p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
 }

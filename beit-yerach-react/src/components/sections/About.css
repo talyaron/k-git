@@ -1,9 +1,10 @@
 #about {
-  background: white;
+  background: var(--bg-tertiary);
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   direction: rtl;
+  transition: background-color 0.3s ease;
 }
 
 .section-title {
@@ -33,7 +34,7 @@
 .about-text p {
   font-size: 1.05rem;
   line-height: 1.8;
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
 
@@ -43,6 +44,11 @@
   border-right: 4px solid var(--lake-blue);
   border-radius: 8px;
   margin: 2rem 0;
+  transition: background-color 0.3s ease;
+}
+
+html.dark-mode .about-highlight {
+  background: linear-gradient(135deg, rgba(74, 159, 216, 0.15), rgba(45, 122, 74, 0.15));
 }
 
 .about-highlight h3 {
@@ -51,13 +57,13 @@
 }
 
 .about-highlight p {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .about-highlight .secondary {
   margin-top: 1rem;
-  color: #777;
+  color: var(--text-secondary);
 }
 
 .about-highlight .highlight-text {
