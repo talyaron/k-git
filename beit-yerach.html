@@ -7,150 +7,125 @@
     <title>בית ירח - Beit Yerach High School</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --navy-deep: #0d3a4a;
+            --teal: #2a7f9e;
+            --teal-light: #4a9fd8;
+            --gold: #d4a574;
+            --gold-light: #e8b88a;
+            --cream: #f9f9f6;
+            --white-glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --text-main: #1a1a1a;
+            --text-muted: #666;
+            --font-main: 'Heebo', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --lake-blue: #1a5f7a;
-            --lake-blue-dark: #0d3a4a;
-            --sky-blue: #4a9fd8;
-            --light-blue: #7ec8e3;
-            --green: #2d7a4a;
-            --light-green: #5ba86b;
-            --cream: #f5f1e8;
-            --text-dark: #1a1a1a;
-            --text-muted: #666;
-            --accent: #d4a574;
-            --accent-warm: #e8b88a;
-            --glass-white: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-        }
-
         html {
             scroll-behavior: smooth;
         }
 
-        html,
         body {
-            height: 100%;
-            width: 100%;
-            font-family: 'Heebo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-dark);
+            font-family: var(--font-main);
+            background-color: var(--cream);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        body {
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
             background: var(--cream);
         }
 
-        /* ===== LOADING SCREEN ===== */
-        .loader {
-            position: fixed;
-            inset: 0;
-            background: var(--lake-blue-dark);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 1.5rem;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+        ::-webkit-scrollbar-thumb {
+            background: var(--teal);
+            border-radius: 4px;
         }
 
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
+        /* --- Animations --- */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
-        .loader-logo {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: white;
-            animation: loaderPulse 1.2s ease-in-out infinite;
+        @keyframes bounce-scroll {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
-        .loader-bar {
-            width: 120px;
-            height: 3px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 3px;
-            overflow: hidden;
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .loader-bar::after {
-            content: '';
-            display: block;
-            width: 40%;
-            height: 100%;
-            background: var(--accent);
-            border-radius: 3px;
-            animation: loaderSlide 1s ease-in-out infinite;
-        }
-
-        @keyframes loaderPulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
-        @keyframes loaderSlide {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(350%); }
-        }
-
-        /* ===== NAVIGATION ===== */
+        /* --- Navigation (Glassmorphism) --- */
         nav {
             position: fixed;
             top: 0;
-            right: 0;
             left: 0;
-            padding: 1.2rem 3rem;
+            right: 0;
+            padding: 1rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        nav.scrolled {
-            background: rgba(26, 95, 122, 0.97);
-            backdrop-filter: blur(20px);
-            padding: 0.8rem 3rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            background: rgba(13, 58, 74, 0.85);
+            /* Deep Navy semi-transparent */
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glass);
+            transition: all 0.3s ease;
         }
 
         nav .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
+            font-size: 1.5rem;
+            font-weight: 900;
             color: white;
             letter-spacing: -0.5px;
-            position: relative;
             cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        nav .logo:hover {
-            transform: scale(1.05);
-        }
-
-        nav .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), transparent);
         }
 
         nav .nav-links {
@@ -160,38 +135,42 @@
         }
 
         nav a {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
             position: relative;
-            padding: 0.3rem 0;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
         }
 
-        nav a:hover,
-        nav a.active {
-            color: white;
+        nav a:hover {
+            color: var(--gold);
         }
 
+        /* Hover Stagger Effect */
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -2px;
-            right: 0;
+            bottom: 0;
+            left: 50%;
             width: 0;
             height: 2px;
-            background: var(--accent);
-            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease, left 0.3s ease;
+            transform: translateX(-50%);
         }
 
-        nav a:hover::after,
-        nav a.active::after {
+        nav a:hover::after {
             width: 100%;
         }
 
 <<<<<<< HEAD
+        /* PolyMarket Link Special Style */
+        .nav-poly {
+            color: var(--teal-light) !important;
+            font-weight: 700 !important;
+=======
         /* Hamburger Menu */
         .hamburger {
             display: none;
@@ -200,156 +179,54 @@
             cursor: pointer;
             padding: 5px;
             z-index: 1001;
+>>>>>>> origin/main
         }
 
-        .hamburger span {
-            display: block;
-            width: 26px;
-            height: 2px;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
-        }
-
-        .hamburger.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-
-        .hamburger.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-
-        /* Mobile menu overlay */
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(13, 58, 74, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .mobile-menu-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu-overlay ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            gap: 2rem;
-        }
-
-        .mobile-menu-overlay ul li {
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .mobile-menu-overlay.open ul li {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .mobile-menu-overlay.open ul li:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu-overlay.open ul li:nth-child(2) { transition-delay: 0.15s; }
-        .mobile-menu-overlay.open ul li:nth-child(3) { transition-delay: 0.2s; }
-        .mobile-menu-overlay.open ul li:nth-child(4) { transition-delay: 0.25s; }
-        .mobile-menu-overlay.open ul li:nth-child(5) { transition-delay: 0.3s; }
-
-        .mobile-menu-overlay a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu-overlay a:hover {
-            color: var(--accent);
-        }
-
-        /* ===== HERO SECTION ===== */
+        /* --- Hero Section (Anti-Gravity & Depth) --- */
         .hero {
+<<<<<<< HEAD
+=======
             margin-top: 0;
             min-height: 100vh;
-            background: linear-gradient(160deg, #2a7f9e 0%, #1a5f7a 40%, #0d3a4a 100%);
-=======
-        /* Hero Section */
-        /* Hero Section */
-        .hero {
-            margin-top: 70px;
-            min-height: calc(100vh - 70px);
 >>>>>>> origin/main
             position: relative;
-            overflow: hidden;
+            min-height: 100vh;
+            background: radial-gradient(circle at top right, #1a5f7a, #0d3a4a);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
 <<<<<<< HEAD
-            padding: 6rem 2rem 8rem;
+            color: white;
+            overflow: hidden;
+            padding-top: 80px;
         }
 
-        /* Animated gradient orbs */
-        .hero::before {
-            content: '';
+        /* Parallax Background Elements */
+        .hero-bg-shape {
             position: absolute;
-            width: 600px;
-            height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(124, 200, 227, 0.15) 0%, transparent 70%);
-            top: -200px;
-            left: -100px;
-            animation: floatOrb1 8s ease-in-out infinite;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(2px);
+            z-index: 1;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
+        .shape-1 {
             width: 500px;
             height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(45, 122, 74, 0.1) 0%, transparent 70%);
-            bottom: -150px;
+            top: -100px;
             right: -100px;
-            animation: floatOrb2 10s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
         }
 
-        @keyframes floatOrb1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, 30px) scale(1.1); }
-            66% { transform: translate(-30px, -20px) scale(0.95); }
-        }
-
-        @keyframes floatOrb2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-40px, -30px) scale(1.15); }
-        }
-
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
 =======
-            padding: 3rem 2rem;
-            color: white;
+            padding: 6rem 2rem 8rem;
         }
 
         .video-background {
@@ -376,7 +253,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(42, 127, 158, 0.85) 0%, rgba(26, 95, 122, 0.8) 50%, rgba(13, 58, 74, 0.9) 100%);
+            background: linear-gradient(160deg, rgba(42, 127, 158, 0.82) 0%, rgba(26, 95, 122, 0.78) 40%, rgba(13, 58, 74, 0.88) 100%);
             z-index: 2;
         }
 
@@ -387,24 +264,12 @@
             width: 100%;
             height: 100%;
             z-index: 3;
->>>>>>> origin/main
             pointer-events: none;
         }
 
-        .particle:nth-child(1) { top: 20%; left: 10%; animation: float 6s ease-in-out infinite; }
-        .particle:nth-child(2) { top: 60%; left: 85%; animation: float 8s ease-in-out infinite 1s; }
-        .particle:nth-child(3) { top: 40%; left: 30%; animation: float 7s ease-in-out infinite 2s; width: 6px; height: 6px; }
-        .particle:nth-child(4) { top: 80%; left: 50%; animation: float 9s ease-in-out infinite 0.5s; }
-        .particle:nth-child(5) { top: 15%; left: 70%; animation: float 7s ease-in-out infinite 3s; width: 5px; height: 5px; }
-        .particle:nth-child(6) { top: 55%; left: 15%; animation: float 10s ease-in-out infinite 1.5s; width: 3px; height: 3px; }
-        .particle:nth-child(7) { top: 35%; left: 90%; animation: float 6.5s ease-in-out infinite 2.5s; }
-        .particle:nth-child(8) { top: 75%; left: 25%; animation: float 8.5s ease-in-out infinite 0.8s; width: 5px; height: 5px; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-            25% { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
-            50% { transform: translateY(-35px) translateX(-5px); opacity: 0.5; }
-            75% { transform: translateY(-15px) translateX(15px); opacity: 0.8; }
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-2%, -2%); }
         }
 
         /* Wave SVG at bottom of hero */
@@ -413,7 +278,7 @@
             bottom: -2px;
             left: 0;
             width: 100%;
-            z-index: 3;
+            z-index: 5;
             line-height: 0;
         }
 
@@ -421,12 +286,28 @@
             width: 100%;
             height: 80px;
             display: block;
+>>>>>>> origin/main
         }
 
         .hero-content {
             position: relative;
 <<<<<<< HEAD
-            z-index: 2;
+            z-index: 10;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom right, #ffffff, var(--teal-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+=======
+            z-index: 4;
         }
 
         .hero-content > * {
@@ -476,43 +357,40 @@
         .hero h1 {
             font-size: 4rem;
             color: white;
-=======
-            z-index: 4;
-            animation: slideUp 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
->>>>>>> origin/main
             margin-bottom: 0.5rem;
             font-weight: 800;
             letter-spacing: -1px;
-<<<<<<< HEAD
             line-height: 1.1;
-=======
-            color: white;
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 >>>>>>> origin/main
         }
 
         .hero h1 small {
             display: block;
-            font-size: 1.4rem;
-            margin-top: 0.8rem;
-            color: var(--light-blue);
+            font-size: 1.5rem;
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            margin-top: 0.5rem;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
         }
 
         .hero p {
-<<<<<<< HEAD
             font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.85);
+<<<<<<< HEAD
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+=======
+            color: rgba(255, 255, 255, 0.9);
             margin: 2rem auto 2.5rem;
             max-width: 550px;
             line-height: 1.7;
             font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .hero-buttons {
@@ -520,85 +398,89 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-=======
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.95);
-            margin: 2rem 0 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 >>>>>>> origin/main
         }
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--accent);
-            color: var(--text-dark);
+        /* Floating CTA Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn {
             padding: 1rem 2.5rem;
-            text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(212, 165, 116, 0.35);
-            border: 2px solid var(--accent);
-            position: relative;
-            overflow: hidden;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy-deep);
+            box-shadow: 0 10px 20px rgba(212, 165, 116, 0.3);
         }
 
-        .cta-button:hover::before {
-            opacity: 1;
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 165, 116, 0.5);
+            background: #fff;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(212, 165, 116, 0.5);
-        }
-
-        .cta-button.outline {
+        .btn-outline {
             background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            border-color: rgba(255,255,255,0.4);
-            box-shadow: none;
+            animation-delay: 1s;
+            /* Offset float */
         }
 
 <<<<<<< HEAD
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+=======
         .cta-button.outline:hover {
             border-color: white;
             background: rgba(255,255,255,0.1);
             box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+>>>>>>> origin/main
         }
 
-        /* ===== SCROLL REVEAL ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce-scroll 2s infinite;
+            opacity: 0.7;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .mouse-icon {
+            width: 26px;
+            height: 40px;
+            border: 2px solid white;
+            border-radius: 15px;
+            position: relative;
         }
 
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .mouse-wheel {
+            width: 4px;
+            height: 8px;
+            background: white;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
+<<<<<<< HEAD
+        /* --- Sections General --- */
+=======
         .reveal-right.visible {
             opacity: 1;
             transform: translateX(0);
@@ -624,47 +506,17 @@
 
         .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
         .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
 
         /* ===== SECTIONS ===== */
-=======
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes kenBurns {
-            0% {
-                transform: scale(1) translate(0, 0);
-            }
-
-            100% {
-                transform: scale(1.15) translate(-2%, -2%);
-            }
-        }
-
-        /* Sections */
 >>>>>>> origin/main
         section {
             padding: 6rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .full-width {
-            max-width: 100%;
-            padding-left: 0;
-            padding-right: 0;
         }
 
         .section-header {
@@ -672,58 +524,56 @@
             margin-bottom: 4rem;
         }
 
-        .section-label {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--sky-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.75rem;
-        }
-
         .section-title {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
+            color: var(--navy-deep);
             font-weight: 800;
             margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--lake-blue), var(--light-blue));
-            border-radius: 4px;
         }
 
         .section-subtitle {
-            font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 600px;
-            margin: 1.5rem auto 0;
-            line-height: 1.7;
-            font-weight: 300;
+            margin: 0 auto;
         }
 
-        /* ===== ABOUT SECTION ===== */
+<<<<<<< HEAD
+        /* --- Bento Box Layout (About) --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+=======
+        /* ===== ABOUT SECTION - THE BIG ONE ===== */
         #about {
             background: white;
-            border-radius: 0;
             position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            padding-bottom: 0;
         }
 
-        .about-content {
+        #about .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About intro */
+        .about-intro {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1.1fr 1fr;
             gap: 4rem;
             align-items: center;
+            margin-bottom: 5rem;
         }
 
         .about-text p {
@@ -731,6 +581,13 @@
             line-height: 1.9;
             color: #555;
             margin-bottom: 1.5rem;
+        }
+
+        .about-text .lead {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.8;
         }
 
         .about-highlight {
@@ -752,496 +609,551 @@
         }
 
         .about-visual {
-            background: linear-gradient(135deg, rgba(74, 159, 216, 0.08), rgba(45, 122, 74, 0.08));
-            padding: 2.5rem;
+            position: relative;
+        }
+
+        .about-visual-card {
+            background: linear-gradient(135deg, var(--lake-blue), var(--lake-blue-dark));
             border-radius: var(--radius-lg);
+            padding: 3rem;
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .about-visual::before {
+        .about-visual-card::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(126, 200, 227, 0.08) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(126, 200, 227, 0.15) 0%, transparent 60%);
             animation: floatOrb1 12s ease-in-out infinite;
         }
 
-        .about-visual h3 {
-            color: var(--lake-blue);
-            margin-bottom: 1.5rem;
+        @keyframes floatOrb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, 30px) scale(1.1); }
+            66% { transform: translate(-30px, -20px) scale(0.95); }
+        }
+
+        .about-visual-card h3 {
             font-size: 1.4rem;
             font-weight: 700;
+            margin-bottom: 0.5rem;
             position: relative;
         }
 
-        .about-visual p {
-            color: #555;
-            line-height: 1.7;
+        .about-visual-card .subtitle {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
             position: relative;
         }
 
         .about-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1rem;
             position: relative;
         }
 
         .about-stat {
             text-align: center;
             padding: 1.2rem;
-            background: white;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
         .about-stat:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            background: rgba(255,255,255,0.18);
         }
 
         .about-stat .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--lake-blue);
-            display: block;
-        }
-
-        .about-stat .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
-        }
-
-        /* ===== STATS BANNER ===== */
-        .stats-banner {
-            background: linear-gradient(135deg, var(--lake-blue) 0%, var(--lake-blue-dark) 100%);
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-item .stat-number {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 800;
             display: block;
-            margin-bottom: 0.3rem;
             background: linear-gradient(135deg, white, var(--light-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .stat-item .stat-label {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.75);
-            font-weight: 400;
+        .about-stat .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.2rem;
         }
 
-        /* ===== ACADEMICS SECTION ===== */
-        #academics {
-            background: linear-gradient(180deg, #f9fbff 0%, var(--cream) 100%);
-        }
-
-        .academic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .academic-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.04);
-            position: relative;
+        /* Fun Facts Marquee */
+        .about-funfacts-wrapper {
             overflow: hidden;
+            padding: 3rem 0;
+            background: linear-gradient(90deg, white 0%, #f0f7fa 50%, white 100%);
+            position: relative;
         }
 
-        .academic-card::before {
+        .about-funfacts-wrapper::before,
+        .about-funfacts-wrapper::after {
             content: '';
             position: absolute;
             top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 2;
+        }
+
+        .about-funfacts-wrapper::before {
             right: 0;
+            background: linear-gradient(to left, white, transparent);
+        }
+
+        .about-funfacts-wrapper::after {
             left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--sky-blue), var(--light-blue));
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(to right, white, transparent);
         }
 
-        .academic-card:hover::before {
-            transform: scaleX(1);
+        .funfacts-track {
+            display: flex;
+            gap: 2rem;
+            animation: marquee 35s linear infinite;
+            width: max-content;
         }
 
-        .academic-card:hover {
-            transform: translateY(-8px);
+        .funfacts-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .funfact-card {
+            flex-shrink: 0;
+            width: 300px;
+            padding: 1.8rem;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .funfact-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .funfact-card .funfact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .funfact-card h4 {
+            color: var(--lake-blue);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .funfact-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .funfact-card .funfact-punchline {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.82rem;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* About Timeline */
+        .about-timeline {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .about-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 50%;
+            width: 3px;
+            background: linear-gradient(180deg, var(--light-blue), var(--lake-blue), var(--green));
+            border-radius: 3px;
+            transform: translateX(50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            right: calc(50% - 10px);
+            width: 20px;
+            height: 20px;
+            background: var(--lake-blue);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--lake-blue);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent), 0 0 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .timeline-card {
+            width: 43%;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-card .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lake-blue), var(--sky-blue));
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-card h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .timeline-card .timeline-joke {
+            color: var(--accent);
+            font-size: 0.82rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* About "Why Us" Grid */
+        .about-why-us {
+            padding: 4rem 0 5rem;
+        }
+
+        .about-why-us h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-why-us .why-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .why-card {
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .why-card:nth-child(1) {
+            background: linear-gradient(135deg, #e8f4f8, #d4eef5);
+        }
+
+        .why-card:nth-child(2) {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+
+        .why-card:nth-child(3) {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        }
+
+        .why-card:nth-child(4) {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px) scale(1.02);
             box-shadow: var(--shadow-lg);
         }
 
-        .academic-card .card-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1.2rem;
+        .why-card .why-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             display: block;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .academic-card:hover .card-icon {
-            transform: scale(1.15) rotate(-5deg);
-        }
-
-        .academic-card h3 {
-            color: var(--lake-blue);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .academic-card p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        /* ===== ACTIVITIES SECTION ===== */
-        #activities {
-            background: white;
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .activity-item {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            background: linear-gradient(135deg, rgba(124, 200, 227, 0.04), rgba(45, 122, 74, 0.04));
-            border-radius: var(--radius-md);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .activity-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, rgba(74, 159, 216, 0.08), rgba(45, 122, 74, 0.08));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .activity-item:hover::after {
-            opacity: 1;
-        }
-
-        .activity-item:hover {
-            transform: translateY(-6px);
-            border-color: rgba(74, 159, 216, 0.15);
-            box-shadow: var(--shadow-md);
-        }
-
-        .activity-icon {
-            font-size: 3.2rem;
-            margin-bottom: 1.2rem;
-            display: block;
-            position: relative;
-            z-index: 1;
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .activity-item:hover .activity-icon {
-            transform: scale(1.2);
+        .why-card:hover .why-icon {
+            transform: scale(1.2) rotate(-8deg);
         }
 
-        .activity-item h3 {
-            color: var(--lake-blue);
-            margin-bottom: 0.6rem;
+        .why-card h4 {
+            font-size: 1.15rem;
             font-weight: 700;
-            position: relative;
-            z-index: 1;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
         }
 
-        .activity-item p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .why-card p {
+            color: #555;
+            font-size: 0.92rem;
             line-height: 1.6;
-            position: relative;
-            z-index: 1;
         }
 
-        /* ===== COMMUNITY SECTION ===== */
-        #community {
-            background: linear-gradient(180deg, #eef6f9 0%, var(--cream) 100%);
+        .why-card .why-joke {
+            font-size: 0.82rem;
+            color: var(--lake-blue);
+            font-weight: 600;
+            margin-top: 0.8rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
         }
 
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+        .why-card:hover .why-joke {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .community-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .community-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 4px;
-            height: 0;
-            background: linear-gradient(180deg, var(--green), var(--light-green));
-            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .community-card:hover::before {
-            height: 100%;
-        }
-
-        .community-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .community-card .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .community-card h3 {
-            color: var(--green);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .community-card p {
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        #contact {
-            background: linear-gradient(160deg, var(--lake-blue) 0%, var(--lake-blue-dark) 100%);
-            color: white;
-            text-align: center;
-            max-width: 100%;
+        /* ===== STATS BANNER ===== */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--lake-blue) 0%, var(--lake-blue-dark) 100%);
+            padding: 4rem 2rem;
+>>>>>>> origin/main
             position: relative;
             overflow: hidden;
         }
 
-        #contact::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-float);
         }
 
-        #contact .section-label {
-            color: var(--accent);
+        .bento-large {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
         }
 
-        #contact .section-title {
+        .bento-tall {
+            grid-column: span 1;
+            grid-row: span 2;
+            background: var(--navy-deep);
             color: white;
         }
 
-        #contact .section-title::after {
-            background: linear-gradient(90deg, var(--light-blue), var(--accent));
+        .bento-wide {
+            grid-column: span 2;
         }
 
-        #contact .section-subtitle {
-            color: rgba(255,255,255,0.7);
+        .bento-small {
+            grid-column: span 1;
         }
 
-        .contact-content {
-            max-width: 1000px;
-            margin: 0 auto;
+        .bento-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .bento-tall h3 {
+            color: var(--gold);
+        }
+
+        .bento-card p {
+            font-size: 0.95rem;
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        /* --- Stats Banner --- */
+        .stats-banner {
+            background: var(--navy-deep);
+            padding: 4rem 2rem;
+            color: white;
+            border-radius: 30px;
+            margin: 2rem;
             position: relative;
-        }
-
-        .contact-info {
+            overflow: hidden;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            text-align: center;
         }
 
-        .contact-item {
-            padding: 2.5rem 2rem;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-md);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Glowing dots accent */
+        .stats-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+            pointer-events: none;
         }
 
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        .stat-item .number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff, var(--teal-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
-        .contact-item .contact-icon {
+        .stat-item .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- Academics & Activities (Cards) --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-float);
+        }
+
+        .icon {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: block;
         }
 
-        .contact-item h3 {
-            margin-bottom: 0.8rem;
-            color: var(--accent);
-            font-size: 1.2rem;
-            font-weight: 700;
+        .feature-card h3 {
+            color: var(--navy-deep);
+            margin-bottom: 1rem;
         }
 
-        .contact-item p {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.8;
-        }
-
-        /* ===== FOOTER ===== */
+        /* --- Footer --- */
         footer {
-            background: #071e28;
+            background: var(--navy-deep);
             color: rgba(255, 255, 255, 0.5);
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
         }
 
         .footer-links {
             display: flex;
+            justify-content: center;
             gap: 2rem;
+            margin-bottom: 2rem;
             list-style: none;
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.4);
+            color: white;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
+            opacity: 0.7;
+            transition: 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-copy {
-            width: 100%;
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.85rem;
-        }
-
-        /* ===== BACK TO TOP ===== */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            width: 48px;
-            height: 48px;
-            background: var(--lake-blue);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 900;
-        }
-
-        .back-to-top.visible {
             opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            color: var(--gold);
         }
 
-        .back-to-top:hover {
-            background: var(--sky-blue);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
+            .bento-large,
+            .bento-tall,
+            .bento-wide,
+            .bento-small {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
             nav {
-                padding: 1rem 1.5rem;
+                padding: 1rem;
             }
 
-            nav.scrolled {
-                padding: 0.7rem 1.5rem;
-            }
-
-            nav .nav-links {
+            .nav-links {
                 display: none;
             }
 
+<<<<<<< HEAD
+            /* Mobile menu simplified for snippet */
+=======
             .hamburger {
                 display: flex;
             }
@@ -1271,7 +1183,7 @@
                 font-size: 2rem;
             }
 
-            .about-content {
+            .about-intro {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -1301,83 +1213,69 @@
             .footer-links {
                 gap: 1.5rem;
             }
-        }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .section-title {
-                font-size: 1.7rem;
+            .about-timeline::before {
+                display: none;
             }
 
-            .stats-banner {
-                padding: 3rem 1rem;
+            .timeline-dot {
+                position: relative;
+                right: auto;
+                margin-bottom: 1rem;
             }
 
-            .contact-info {
+            .timeline-card {
+                width: 100%;
+            }
+
+            .why-grid {
                 grid-template-columns: 1fr;
             }
+>>>>>>> origin/main
+        }
+
+        /* Reveal Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-logo">בית ירח</div>
-        <div class="loader-bar"></div>
-    </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">בית ירח</div>
+    <nav>
+        <div class="logo">בית ירח</div>
         <ul class="nav-links">
             <li><a href="#about">אודות</a></li>
             <li><a href="#academics">לימודים</a></li>
             <li><a href="#activities">פעילויות</a></li>
             <li><a href="#community">קהילה</a></li>
             <li><a href="#contact">יצירת קשר</a></li>
-            <li><a href="poly_market.html" style="color: var(--light-blue); font-weight: bold;">PolyMarket</a></li>
+            <li><a href="poly_market.html" class="nav-poly">PolyMarket</a></li>
         </ul>
-        <div class="hamburger" id="hamburger" aria-label="תפריט">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
     </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <ul>
-            <li><a href="#about">אודות</a></li>
-            <li><a href="#academics">לימודים</a></li>
-            <li><a href="#activities">פעילויות</a></li>
-            <li><a href="#community">קהילה</a></li>
-            <li><a href="#contact">יצירת קשר</a></li>
-        </ul>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero">
 <<<<<<< HEAD
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        <div class="hero-bg-shape shape-1"></div>
+        <div class="hero-bg-shape shape-2"></div>
 
-        <div class="hero-content" id="heroContent">
-            <div class="hero-badge">עמק הירדן, ליד הכנרת</div>
+        <div class="hero-content">
 =======
         <div class="video-background">
             <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1920&auto=format&fit=crop"
@@ -1385,177 +1283,353 @@
         </div>
         <div class="hero-overlay"></div>
         <canvas id="particles-canvas"></canvas>
-        <div class="hero-content">
+
+        <div class="hero-content" id="heroContent">
+            <div class="hero-badge">עמק הירדן, ליד הכנרת</div>
 >>>>>>> origin/main
             <h1>בית ירח <small>Beit Yerach High School</small></h1>
-            <p>חינוך מעולה ליד המים היפים של הכנרת, בעמק הירדן. מקום שבו תלמידים צומחים, חולמים ומצליחים.</p>
-            <div class="hero-buttons">
-                <a href="#about" class="cta-button">גלה עוד</a>
-                <a href="#contact" class="cta-button outline">צור קשר</a>
+            <p>חינוך מעולה ליד המים היפים של הכנרת. המקום בו חדשנות פוגשת מסורת, ומצוינות היא דרך חיים.</p>
+
+            <div class="btn-group">
+                <a href="#about" class="btn btn-primary">גלה עוד</a>
+                <a href="poly_market.html" class="btn btn-outline">PolyMarket</a>
             </div>
         </div>
 
-        <div class="hero-wave">
-            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" fill="white"/>
-            </svg>
+        <div class="scroll-indicator">
+            <div class="mouse-icon">
+                <div class="mouse-wheel"></div>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
+<<<<<<< HEAD
+    <!-- About Section (Bento Box) -->
     <section id="about">
         <div class="section-header reveal">
-            <span class="section-label">מי אנחנו</span>
             <h2 class="section-title">אודות בית ירח</h2>
-            <p class="section-subtitle">בית ספר תיכון ייחודי בלב עמק הירדן, המשלב חינוך מתקדם עם חוויות טבע ייחודיות</p>
+            <p class="section-subtitle">קהילה לומדת, יוצרת ומשפיעה על גדות הכנרת</p>
         </div>
-        <div class="about-content">
-<<<<<<< HEAD
-            <div class="about-text reveal-right">
-                <p>בית ירח היא בית ספר תיכון מובנה המוקדש לחינוך איכותי במקום המיוחד של עמק הירדן, סמוך לכנרת. המכללה משלבת בין לימודים מתקדמים ופעילויות חברתיות באמצע הטבע.</p>
-                <div class="about-highlight">
-                    <p><strong>תשומת לב:</strong> בתנובת בית הספר תושם דגש על פתיחת חלונות לעולם דרך חקר, טבע וחברה. תלמידינו לומדים בסביבה שמעוררת השראה ומשפיעה.</p>
-=======
-            <div class="about-text">
-                <p>בית ירח היא בית ספר תיכון מובנה המוקדש לחינוך איכותי במקום המיוחד של עמק הירדן, סמוך לכנרת. המכללה
-                    משלבת בין לימודים מתקדמים ופעילויות חברתיות באמצע הטבע.</p>
-                <div class="about-highlight">
-                    <p><strong>תשומת לב:</strong> בתנובת בית הספר תושם דגש על פתיחת חלונות לעולם דרך חקר, טבע וחברה.
-                        תלמידינו לומדים בסביבה שמעורה משהו מיוחד ומשפיע.</p>
->>>>>>> origin/main
+
+        <div class="bento-grid">
+            <div class="bento-card bento-large reveal">
+                <h3>🌊 המיקום שלנו</h3>
+                <p>ממוקמים על גבעה המשקיפה אל הכנרת ועמק הירדן, בית ירח מציע סביבת לימודים מעוררת השראה שאין כמותה
+                    בישראל. החיבור לטבע הוא חלק בלתי נפרד מהפדגוגיה שלנו.</p>
+                <div
+                    style="margin-top:1rem; height: 150px; background: url('https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=600') center/cover; border-radius: 12px;">
                 </div>
-                <p>ממוקמים על גבעה המשקיפה אל כנרת, אנחנו מעניקים לתלמידים חוויה חינוכית ייחודית הממזגת בין הלימודים
-                    העתיקים לחדשנות.</p>
             </div>
-            <div class="about-visual reveal-left">
-                <h3>מיקום ייחודי</h3>
-                <p>סמוך לכנרת (ים של גליל), בעמק הירדן היפה. תלמידים מכל רחבי הארץ בוחרים ללמוד כאן.</p>
-                <div class="about-stats">
-                    <div class="about-stat">
-                        <span class="stat-number" data-target="30">0</span>
-                        <span class="stat-label">שנות ניסיון</span>
+
+            <div class="bento-card bento-tall reveal">
+                <h3>החזון שלנו</h3>
+                <p>טיפוח בוגר עצמאי, ערכי וסקרן, בעל מיומנויות המאה ה-21.</p>
+                <div style="margin-top: 2rem; font-size: 3rem;">🚀</div>
+                <p style="margin-top: 1rem;">מצוינות בחינוך מאז 1950</p>
+            </div>
+
+            <div class="bento-card bento-small reveal">
+                <h3>חדשנות</h3>
+                <p>מעבדות מתקדמות ומרחבי לימוד דינמיים.</p>
+            </div>
+
+            <div class="bento-card bento-small reveal">
+                <h3>קהילה</h3>
+                <p>קשר חם ואישי בין מורים לתלמידים.</p>
+=======
+    <!-- ===================== ABOUT SECTION ===================== -->
+    <section id="about">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <span class="section-label">מי אנחנו (באמת)</span>
+                <h2 class="section-title">אודות בית ירח</h2>
+                <p class="section-subtitle">בית ספר תיכון שבו הכנרת היא לוח המודעות, השמש היא השעון, והטבע הוא המורה הכי ותיק</p>
+            </div>
+
+            <!-- Intro Grid -->
+            <div class="about-intro">
+                <div class="about-text reveal-right">
+                    <p class="lead">בית ירח היא לא סתם בית ספר - היא מקום שבו תלמידים מגלים מי הם באמת, ליד אגם שקיים כבר כמה אלפי שנים (אז כן, הוא ראה הכל).</p>
+                    <p>אנחנו משלבים בין לימודים ברמה הגבוהה ביותר לבין חוויות שטח ייחודיות. כי בואו נודה - קשה להתעלם מהנוף כשהמעבדה שלך נמצאת ליד ים של גליל.</p>
+                    <div class="about-highlight">
+                        <p><strong>הפילוסופיה שלנו:</strong> חינוך צריך לפתוח חלונות, לא לסגור דלתות. אנחנו מאמינים שתלמיד שלומד בסביבה מעוררת השראה - לומד פי שניים. ותלמיד שרואה את הכנרת מהחלון - פשוט לא רוצה לברוח מהשיעור.</p>
                     </div>
-                    <div class="about-stat">
-                        <span class="stat-number" data-target="95">0</span>
-                        <span class="stat-label">אחוז הצלחה</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="stat-number" data-target="50">0</span>
-                        <span class="stat-label">מורים מקצועיים</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="stat-number" data-target="12">0</span>
-                        <span class="stat-label">מגמות לימוד</span>
+                    <p>ממוקמים על גבעה המשקיפה אל הכנרת, אנחנו מעניקים לתלמידים חוויה חינוכית שממזגת בין חוכמה עתיקה לחדשנות מודרנית. זה כמו לשלב את ויקיפדיה עם טיול שנתי - רק שאצלנו זה כל יום.</p>
+                </div>
+                <div class="about-visual reveal-left">
+                    <div class="about-visual-card">
+                        <h3>המספרים מדברים</h3>
+                        <p class="subtitle">(ואנחנו לא ממציאים אותם)</p>
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="30">0</span>
+                                <span class="stat-label">שנות ניסיון</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="95">0</span>
+                                <span class="stat-label">% הצלחה בבגרות</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="50">0</span>
+                                <span class="stat-label">מורים מקצועיים</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-target="12">0</span>
+                                <span class="stat-label">מגמות לימוד</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Fun Facts Marquee -->
+            <div class="about-funfacts-wrapper">
+                <div class="funfacts-track" id="funfactsTrack">
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌊</span>
+                        <h4>5 דקות מהכנרת</h4>
+                        <p>המרחק מבית הספר לחוף. יש מי שטוענים שזה יתרון אקדמי. אנחנו לא מתווכחים.</p>
+                        <div class="funfact-punchline">הנוף שווה יותר מאלף מילים במבחן</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌡️</span>
+                        <h4>300 ימי שמש בשנה</h4>
+                        <p>בעוד שאר הארץ מתלוננת על הגשם, אנחנו בחוץ לומדים בטבע. שמש = אנרגיה = ציונים טובים (בערך).</p>
+                        <div class="funfact-punchline">ויטמין D חינם לכל תלמיד</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🐟</span>
+                        <h4>שיעור ביולוגיה חי</h4>
+                        <p>למה ללמוד על דגים מספר כשאפשר לראות אותם לייב? מעבדת הטבע שלנו היא הכנרת כולה.</p>
+                        <div class="funfact-punchline">אמנון ודג הפיטר מלמדים אנטומיה</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏔️</span>
+                        <h4>210 מטר מתחת לפני הים</h4>
+                        <p>אנחנו הבית ספר הכי נמוך בעולם (גאוגרפית). אבל הציונים? אלה גבוהים.</p>
+                        <div class="funfact-punchline">הנמוכים ביותר עם השאיפות הגבוהות ביותר</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏛️</span>
+                        <h4>5,000 שנות היסטוריה</h4>
+                        <p>בית ירח הוא אתר ארכיאולוגי מתקופת הברונזה הקדומה. ההיסטוריה ממש מתחת לרגליים.</p>
+                        <div class="funfact-punchline">שיעורי היסטוריה שאפשר לחפור בהם. ממש</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🧪</span>
+                        <h4>3 מעבדות מתקדמות</h4>
+                        <p>כימיה, פיזיקה וביוטכנולוגיה. כל מה שצריך כדי לגלות שמדע זה בעצם מגניב.</p>
+                        <div class="funfact-punchline">פיצוצים מבוקרים בלבד, אנחנו מבטיחים</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🚴</span>
+                        <h4>מסלול אופניים צמוד</h4>
+                        <p>שביל האופניים סביב הכנרת עובר ממש ליד. שיעור ספורט = רכיבה עם נוף.</p>
+                        <div class="funfact-punchline">ציון 100 בספורט כולל שיזוף</div>
+                    </div>
+                    <!-- Duplicated for seamless loop -->
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌊</span>
+                        <h4>5 דקות מהכנרת</h4>
+                        <p>המרחק מבית הספר לחוף. יש מי שטוענים שזה יתרון אקדמי. אנחנו לא מתווכחים.</p>
+                        <div class="funfact-punchline">הנוף שווה יותר מאלף מילים במבחן</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🌡️</span>
+                        <h4>300 ימי שמש בשנה</h4>
+                        <p>בעוד שאר הארץ מתלוננת על הגשם, אנחנו בחוץ לומדים בטבע. שמש = אנרגיה = ציונים טובים (בערך).</p>
+                        <div class="funfact-punchline">ויטמין D חינם לכל תלמיד</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🐟</span>
+                        <h4>שיעור ביולוגיה חי</h4>
+                        <p>למה ללמוד על דגים מספר כשאפשר לראות אותם לייב? מעבדת הטבע שלנו היא הכנרת כולה.</p>
+                        <div class="funfact-punchline">אמנון ודג הפיטר מלמדים אנטומיה</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏔️</span>
+                        <h4>210 מטר מתחת לפני הים</h4>
+                        <p>אנחנו הבית ספר הכי נמוך בעולם (גאוגרפית). אבל הציונים? אלה גבוהים.</p>
+                        <div class="funfact-punchline">הנמוכים ביותר עם השאיפות הגבוהות ביותר</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🏛️</span>
+                        <h4>5,000 שנות היסטוריה</h4>
+                        <p>בית ירח הוא אתר ארכיאולוגי מתקופת הברונזה הקדומה. ההיסטוריה ממש מתחת לרגליים.</p>
+                        <div class="funfact-punchline">שיעורי היסטוריה שאפשר לחפור בהם. ממש</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🧪</span>
+                        <h4>3 מעבדות מתקדמות</h4>
+                        <p>כימיה, פיזיקה וביוטכנולוגיה. כל מה שצריך כדי לגלות שמדע זה בעצם מגניב.</p>
+                        <div class="funfact-punchline">פיצוצים מבוקרים בלבד, אנחנו מבטיחים</div>
+                    </div>
+                    <div class="funfact-card">
+                        <span class="funfact-icon">🚴</span>
+                        <h4>מסלול אופניים צמוד</h4>
+                        <p>שביל האופניים סביב הכנרת עובר ממש ליד. שיעור ספורט = רכיבה עם נוף.</p>
+                        <div class="funfact-punchline">ציון 100 בספורט כולל שיזוף</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="about-timeline reveal">
+                <div class="section-header">
+                    <span class="section-label">ציר הזמן</span>
+                    <h2 class="section-title" style="font-size: 2rem;">הסיפור שלנו</h2>
+                    <p class="section-subtitle">מהתחלה צנועה ועד היום - הדרך הייתה שווה כל רגע</p>
+                </div>
+
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">1994</span>
+                        <h4>הקמת בית הספר</h4>
+                        <p>קבוצה של אנשי חינוך חלמה על בית ספר ליד הכנרת. כולם אמרו להם "אתם משוגעים". הם הסכימו - והמשיכו.</p>
+                        <div class="timeline-joke">להיות משוגע זו דרישת סף למורים אצלנו</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2003</span>
+                        <h4>הרחבת הקמפוס</h4>
+                        <p>בניין חדש, מעבדות מודרניות, ומגרש ספורט עם נוף לכנרת. סוף סוף מקום לשים את כל החלומות.</p>
+                        <div class="timeline-joke">המעבדה החדשה הריחה טוב. לשבוע</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2015</span>
+                        <h4>מצוינות אקדמית</h4>
+                        <p>בית ירח הוכר כאחד מבתי הספר המובילים בצפון. 95% הצלחה בבגרות - ולא בגלל שהשאלות היו קלות.</p>
+                        <div class="timeline-joke">התעודות שלנו לא נכתבות בעיפרון</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-year">2024</span>
+                        <h4>חדשנות טכנולוגית</h4>
+                        <p>מגמת סייבר, AI ורובוטיקה. כי אם כבר להכין תלמידים לעתיד - אז לעתיד האמיתי, לא זה מהסרטים.</p>
+                        <div class="timeline-joke">הרובוטים עדיין לא מחליפים את המורים. עדיין</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Us -->
+            <div class="about-why-us reveal">
+                <h3>למה דווקא בית ירח?</h3>
+                <p class="why-subtitle">כי יש הבדל בין ללמוד לבין לחיות את הלמידה</p>
+                <div class="why-grid stagger-children">
+                    <div class="why-card">
+                        <span class="why-icon">🏖️</span>
+                        <h4>מיקום שלא משעמם</h4>
+                        <p>בזמן שבתי ספר אחרים מראים תמונות של טבע - אנחנו פשוט פותחים חלון. הכנרת, הגולן, עמק הירדן - הכל בהישג יד.</p>
+                        <div class="why-joke">התלמידים באים בשביל הלימודים. נשארים בשביל הנוף</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🧠</span>
+                        <h4>חינוך שמתאים לך</h4>
+                        <p>12 מגמות לימוד, מסלולים מותאמים אישית, והצוות הפדגוגי שלנו מכיר כל תלמיד בשם (ובתחביבים).</p>
+                        <div class="why-joke">אם התעצלת בשיעורים - נדע. אנחנו רואים הכל</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🤝</span>
+                        <h4>קהילה אמיתית</h4>
+                        <p>זה לא סתם בית ספר - זו משפחה. עם כל הריבים, האהבה והאוכל הביתי של ההורים באירועים.</p>
+                        <div class="why-joke">כמו משפחה רגילה, רק עם יותר מבחנים</div>
+                    </div>
+                    <div class="why-card">
+                        <span class="why-icon">🚀</span>
+                        <h4>הכנה לעתיד</h4>
+                        <p>מגמות טכנולוגיה, סדנאות יזמות, ופרויקטים אמיתיים. כשתלמידים שלנו מגיעים לצבא/אוניברסיטה - הם מוכנים.</p>
+                        <div class="why-joke">הבוגרים שלנו לא מפחדים מאקסלים. או מחיים</div>
+                    </div>
+                </div>
+>>>>>>> origin/main
             </div>
         </div>
     </section>
 
     <!-- Stats Banner -->
-    <div class="stats-banner">
-        <div class="stats-grid stagger-children" id="statsGrid">
-            <div class="stat-item">
-                <span class="stat-number" data-target="500">0</span>
-                <span class="stat-label">תלמידים</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="50">0</span>
-                <span class="stat-label">מורים</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="95">0</span>
-                <span class="stat-label">% הצלחה בבגרות</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="30">0</span>
-                <span class="stat-label">שנות פעילות</span>
-            </div>
+    <div class="stats-banner reveal">
+        <div class="stat-item">
+            <span class="number">98%</span>
+            <span class="label">זכאות לבגרות</span>
+        </div>
+        <div class="stat-item">
+            <span class="number">1200</span>
+            <span class="label">תלמידים</span>
+        </div>
+        <div class="stat-item">
+            <span class="number">120</span>
+            <span class="label">מורים</span>
+        </div>
+        <div class="stat-item">
+            <span class="number">30+</span>
+            <span class="label">שנות מצוינות</span>
         </div>
     </div>
 
-    <!-- Academics Section -->
+    <!-- Academics -->
     <section id="academics">
         <div class="section-header reveal">
-            <span class="section-label">לימודים</span>
-            <h2 class="section-title">מגמות לימוד</h2>
-            <p class="section-subtitle">מגוון רחב של מגמות לימוד מתקדמות המותאמות לכל תלמיד</p>
+            <h2 class="section-title">מסלולי לימוד</h2>
+            <p class="section-subtitle">מגוון רחב של מגמות המאפשרות לכל תלמיד למצוא את הדרך שלו</p>
         </div>
-        <div class="academic-grid stagger-children">
-            <div class="academic-card">
-                <span class="card-icon">📚</span>
-                <h3>מדעי הטבע</h3>
-                <p>חקר בעלי חיים, צומח ותופעות טבעיות בסביבה שלנו. שילוב בין תיאוריה לעבודה מעשית בשטח.</p>
-            </div>
-            <div class="academic-card">
-                <span class="card-icon">🔬</span>
+
+        <div class="cards-grid">
+            <div class="feature-card reveal">
+                <span class="icon">🔬</span>
                 <h3>מדעים וטכנולוגיה</h3>
-                <p>למידה מדעית מקדמת עם מעבדות מודרניות וציוד טכנולוגי. החוקרים יכולים לבחור בתבחני מתקדמים.</p>
+                <p>ביולוגיה, פיזיקה, וכימיה ברמה הגבוהה ביותר עם מעבדות חדישות.</p>
             </div>
-            <div class="academic-card">
-                <span class="card-icon">🎓</span>
-                <h3>מנהיגות ותיכנון</h3>
-                <p>פיתוח כישורים מנהיגותיים דרך פרויקטים קהילתיים, התנדבות וחירותים של עתיד.</p>
+            <div class="feature-card reveal">
+                <span class="icon">💻</span>
+                <h3>סייבר ומחשבים</h3>
+                <p>לימודי תכנות מתקדמים, הנדסת תוכנה וסייבר.</p>
             </div>
-            <div class="academic-card">
-                <span class="card-icon">🌍</span>
-                <h3>לימודי תרבות</h3>
-                <p>הבנת תיאום בין תרבויות, קריאה עמוקה של טקסטים וביטוי יצירתי דרך אומנות.</p>
-            </div>
-            <div class="academic-card">
-                <span class="card-icon">💻</span>
-                <h3>דיגיטל ותכנות</h3>
-                <p>אתרים, אפליקציות ובעיות חישוביות. למידה דרך עשייה במסגרת פרויקטים אמיתיים.</p>
-            </div>
-            <div class="academic-card">
-                <span class="card-icon">🎨</span>
-                <h3>אומנות וביטוי</h3>
-                <p>צילום, ציור, מוזיקה ותיאטרון. פתח את הכישרון שלך בתחום הבנתך.</p>
+            <div class="feature-card reveal">
+                <span class="icon">🎨</span>
+                <h3>אמנויות</h3>
+                <p>קולנוע, תיאטרון ואמנות פלסטית ככלי לביטוי אישי.</p>
             </div>
         </div>
     </section>
 
-    <!-- Activities Section -->
-    <section id="activities">
+    <!-- Contact -->
+    <section id="contact">
         <div class="section-header reveal">
-            <span class="section-label">חוויות</span>
-            <h2 class="section-title">פעילויות וחוויות</h2>
-            <p class="section-subtitle">חוויות שמעצבות אישיות ויוצרות זיכרונות לכל החיים</p>
+            <h2 class="section-title">צור קשר</h2>
+            <p class="section-subtitle">אנחנו כאן לכל שאלה</p>
         </div>
-        <div class="activities-grid stagger-children">
-            <div class="activity-item">
-                <span class="activity-icon">🏕️</span>
-                <h3>טיולים וקמפינג</h3>
-                <p>חוקרים את הטבע של הגליל בטיולים בשטח וקמפים היוצרים זיכרונות לכל החיים.</p>
+        <div class="cards-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="feature-card reveal" style="text-align:center;">
+                <span class="icon">📍</span>
+                <h3>כתובת</h3>
+                <p>עמק הירדן, ד.נ. עמק הירדן 15135</p>
             </div>
-            <div class="activity-item">
-                <span class="activity-icon">🏐</span>
-                <h3>ספורט וכושר</h3>
-                <p>כדורעף, כדורסל, הליכה, יוגה וטיולי אופניים לאורך הכנרת.</p>
+            <div class="feature-card reveal" style="text-align:center;">
+                <span class="icon">📞</span>
+                <h3>טלפון</h3>
+                <p>04-675-XXXX</p>
             </div>
-            <div class="activity-item">
-                <span class="activity-icon">🎭</span>
-                <h3>תיאטרון ותרבות</h3>
-                <p>קבוצות בימה, הצגות חיות ואירועי תרבות במהלך השנה.</p>
-            </div>
-            <div class="activity-item">
-                <span class="activity-icon">🤝</span>
-                <h3>התנדבות קהילתית</h3>
-                <p>פרויקטים צדקה, עזרה לקהילה מקומית ותרומה חברתית משמעותית.</p>
-            </div>
-            <div class="activity-item">
-                <span class="activity-icon">🎵</span>
-                <h3>מוזיקה ואומנות</h3>
-                <p>להקה, מקהלה, סדנאות אומנות וקונצרטים של תלמידים.</p>
-            </div>
-            <div class="activity-item">
-                <span class="activity-icon">🌱</span>
-                <h3>סביבה וקיימות</h3>
-                <p>פרויקטים סביבתיים, גינת צמחי מרפא וקיימות ירוקה.</p>
+            <div class="feature-card reveal" style="text-align:center;">
+                <span class="icon">✉️</span>
+                <h3>מייל</h3>
+                <p>contact@beityerach.co.il</p>
             </div>
         </div>
     </section>
 
+<<<<<<< HEAD
+=======
     <!-- Community Section -->
     <section id="community">
         <div class="section-header reveal">
@@ -1565,15 +1639,9 @@
         </div>
         <div class="community-grid stagger-children">
             <div class="community-card">
-<<<<<<< HEAD
                 <span class="card-icon">👨‍🎓</span>
                 <h3>הסטודנטים</h3>
                 <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ. מקום שבו הם יכולים להיות עצמם, לצמוח ולהתפתח.</p>
-=======
-                <h3>👨‍🎓 הסטודנטים</h3>
-                <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ, האם החדשנות וגם המסורת. מקום שהם יכולים להיות עצמם ולהתפתח.
-                </p>
->>>>>>> origin/main
             </div>
             <div class="community-card">
                 <span class="card-icon">👩‍🏫</span>
@@ -1617,28 +1685,30 @@
     </section>
 
     <!-- Footer -->
+>>>>>>> origin/main
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">בית ירח</div>
-            <ul class="footer-links">
-                <li><a href="#about">אודות</a></li>
-                <li><a href="#academics">לימודים</a></li>
-                <li><a href="#activities">פעילויות</a></li>
-                <li><a href="#community">קהילה</a></li>
-                <li><a href="#contact">יצירת קשר</a></li>
-            </ul>
-            <p class="footer-copy">&copy; 2026 בית ירח | Beit Yerach High School. כל הזכויות שמורות.</p>
-        </div>
+        <ul class="footer-links">
+            <li><a href="#about">אודות</a></li>
+            <li><a href="#academics">לימודים</a></li>
+            <li><a href="#contact">צור קשר</a></li>
+        </ul>
+        <p>&copy; 2026 בית ירח | כל הזכויות שמורות</p>
     </footer>
 <<<<<<< HEAD
+=======
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="חזרה למעלה">&#8593;</button>
+>>>>>>> origin/main
 
     <script>
-    (function() {
-        'use strict';
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.reveal');
 
+<<<<<<< HEAD
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+=======
         // ===== LOADER =====
         window.addEventListener('load', function() {
             setTimeout(function() {
@@ -1646,18 +1716,85 @@
             }, 800);
         });
 
+        // ===== CANVAS PARTICLES =====
+        var canvas = document.getElementById('particles-canvas');
+        var ctx = canvas.getContext('2d');
+        var pWidth, pHeight;
+        var particlesArray = [];
+
+        function resizeCanvas() {
+            var hero = document.querySelector('.hero');
+            if (hero) {
+                pWidth = hero.offsetWidth;
+                pHeight = hero.offsetHeight;
+            } else {
+                pWidth = window.innerWidth;
+                pHeight = window.innerHeight;
+            }
+            canvas.width = pWidth;
+            canvas.height = pHeight;
+        }
+
+        function Particle() {
+            this.x = Math.random() * pWidth;
+            this.y = Math.random() * pHeight;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.4 - 0.2;
+            this.speedY = Math.random() * 0.4 - 0.2;
+            this.opacity = Math.random() * 0.5 + 0.3;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > pWidth) this.x = 0;
+            if (this.x < 0) this.x = pWidth;
+            if (this.y > pHeight) this.y = 0;
+            if (this.y < 0) this.y = pHeight;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + this.opacity + ')';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        };
+
+        function initParticles() {
+            resizeCanvas();
+            particlesArray = [];
+            for (var i = 0; i < 80; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, pWidth, pHeight);
+            for (var i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+
         // ===== NAVBAR SCROLL EFFECT =====
         var navbar = document.getElementById('navbar');
-        var lastScroll = 0;
 
         window.addEventListener('scroll', function() {
-            var scrollY = window.pageYOffset;
-            if (scrollY > 50) {
+            if (window.pageYOffset > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-            lastScroll = scrollY;
         });
 
         // ===== ACTIVE NAV LINK =====
@@ -1693,7 +1830,6 @@
             document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
         });
 
-        // Close mobile menu on link click
         mobileMenu.querySelectorAll('a').forEach(function(link) {
             link.addEventListener('click', function() {
                 hamburger.classList.remove('open');
@@ -1712,47 +1848,43 @@
 
         var revealObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
+>>>>>>> origin/main
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
+                    entry.target.classList.add('active');
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -60px 0px'
-        });
+        }, { threshold: 0.1 });
 
-        revealElements.forEach(function(el) {
-            revealObserver.observe(el);
-        });
+        revealElements.forEach(el => revealObserver.observe(el));
 
-        // ===== COUNTER ANIMATION =====
-        var counters = document.querySelectorAll('[data-target]');
-        var counterAnimated = new Set();
+        // Parallax Effect for Hero Shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.hero-bg-shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
 
-        var counterObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting && !counterAnimated.has(entry.target)) {
-                    counterAnimated.add(entry.target);
-                    animateCounter(entry.target);
-                }
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 20;
+                shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
             });
-        }, { threshold: 0.5 });
-
-        counters.forEach(function(counter) {
-            counterObserver.observe(counter);
         });
 
+<<<<<<< HEAD
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(13, 58, 74, 0.95)';
+                nav.style.padding = '0.8rem 3rem';
+=======
         function animateCounter(el) {
             var target = parseInt(el.getAttribute('data-target'));
             var duration = 2000;
-            var start = 0;
             var startTime = null;
 
             function step(timestamp) {
                 if (!startTime) startTime = timestamp;
                 var progress = Math.min((timestamp - startTime) / duration, 1);
-                // Ease out cubic
                 var eased = 1 - Math.pow(1 - progress, 3);
                 var current = Math.floor(eased * target);
                 el.textContent = current;
@@ -1772,10 +1904,14 @@
         window.addEventListener('scroll', function() {
             if (window.pageYOffset > 500) {
                 backToTop.classList.add('visible');
+>>>>>>> origin/main
             } else {
-                backToTop.classList.remove('visible');
+                nav.style.background = 'rgba(13, 58, 74, 0.85)';
+                nav.style.padding = '1rem 3rem';
             }
         });
+<<<<<<< HEAD
+=======
 
         backToTop.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1796,81 +1932,6 @@
         });
 
     })();
-=======
-    <script>
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particlesArray;
-
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight; // Full height background
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                // Match canvas to hero size
-                width = hero.offsetWidth;
-                height = hero.offsetHeight;
-            }
-            canvas.width = width;
-            canvas.height = height;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.opacity = Math.random() * 0.5 + 0.3;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Wrap around
-                if (this.x > width) this.x = 0;
-                if (this.x < 0) this.x = width;
-                if (this.y > height) this.y = 0;
-                if (this.y < 0) this.y = height;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            resize();
-            particlesArray = [];
-            for (let i = 0; i < 80; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            resize();
-            init();
-        });
-
-        // Wait for DOM
-        document.addEventListener('DOMContentLoaded', () => {
-            init();
-            animate();
-        });
 >>>>>>> origin/main
     </script>
 </body>
