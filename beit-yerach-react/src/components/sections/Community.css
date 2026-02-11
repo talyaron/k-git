@@ -1,0 +1,38 @@
+#community {
+  background: linear-gradient(135deg, #e8f4f8 0%, #f5f1e8 100%);
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#community .section-title {
+  position: relative;
+  padding-right: 2rem;
+}
+
+#community .section-title::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lake-blue), var(--light-blue));
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  #community {
+    padding: 3rem 1rem;
+  }
+
+  #community .section-title {
+    font-size: 1.8rem;
+  }
+}

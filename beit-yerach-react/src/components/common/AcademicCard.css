@@ -1,0 +1,26 @@
+.academic-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid var(--sky-blue);
+  direction: rtl;
+}
+
+.academic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.academic-card h3 {
+  color: var(--lake-blue);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.academic-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}

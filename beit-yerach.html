@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +41,8 @@
             scroll-behavior: smooth;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             width: 100%;
             font-family: 'Heebo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -189,6 +191,7 @@
             width: 100%;
         }
 
+<<<<<<< HEAD
         /* Hamburger Menu */
         .hamburger {
             display: none;
@@ -284,12 +287,20 @@
             margin-top: 0;
             min-height: 100vh;
             background: linear-gradient(160deg, #2a7f9e 0%, #1a5f7a 40%, #0d3a4a 100%);
+=======
+        /* Hero Section */
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+>>>>>>> origin/main
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+<<<<<<< HEAD
             padding: 6rem 2rem 8rem;
         }
 
@@ -336,6 +347,47 @@
             height: 4px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
+=======
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .video-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: kenBurns 20s ease-in-out infinite alternate;
+            transform-origin: center center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42, 127, 158, 0.85) 0%, rgba(26, 95, 122, 0.8) 50%, rgba(13, 58, 74, 0.9) 100%);
+            z-index: 2;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+>>>>>>> origin/main
             pointer-events: none;
         }
 
@@ -373,6 +425,7 @@
 
         .hero-content {
             position: relative;
+<<<<<<< HEAD
             z-index: 2;
         }
 
@@ -423,10 +476,23 @@
         .hero h1 {
             font-size: 4rem;
             color: white;
+=======
+            z-index: 4;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+>>>>>>> origin/main
             margin-bottom: 0.5rem;
             font-weight: 800;
             letter-spacing: -1px;
+<<<<<<< HEAD
             line-height: 1.1;
+=======
+            color: white;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+>>>>>>> origin/main
         }
 
         .hero h1 small {
@@ -440,6 +506,7 @@
         }
 
         .hero p {
+<<<<<<< HEAD
             font-size: 1.25rem;
             color: rgba(255, 255, 255, 0.85);
             margin: 2rem auto 2.5rem;
@@ -453,6 +520,15 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+=======
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+>>>>>>> origin/main
         }
 
         .cta-button {
@@ -498,6 +574,7 @@
             box-shadow: none;
         }
 
+<<<<<<< HEAD
         .cta-button.outline:hover {
             border-color: white;
             background: rgba(255,255,255,0.1);
@@ -553,6 +630,31 @@
         .stagger-children.visible > *:nth-child(6) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
 
         /* ===== SECTIONS ===== */
+=======
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.15) translate(-2%, -2%);
+            }
+        }
+
+        /* Sections */
+>>>>>>> origin/main
         section {
             padding: 6rem 2rem;
             max-width: 1200px;
@@ -1225,6 +1327,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loader" id="loader">
@@ -1241,6 +1344,7 @@
             <li><a href="#activities">פעילויות</a></li>
             <li><a href="#community">קהילה</a></li>
             <li><a href="#contact">יצירת קשר</a></li>
+            <li><a href="poly_market.html" style="color: var(--light-blue); font-weight: bold;">PolyMarket</a></li>
         </ul>
         <div class="hamburger" id="hamburger" aria-label="תפריט">
             <span></span>
@@ -1262,6 +1366,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
+<<<<<<< HEAD
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -1273,6 +1378,15 @@
 
         <div class="hero-content" id="heroContent">
             <div class="hero-badge">עמק הירדן, ליד הכנרת</div>
+=======
+        <div class="video-background">
+            <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?q=80&w=1920&auto=format&fit=crop"
+                alt="Sea of Galilee View">
+        </div>
+        <div class="hero-overlay"></div>
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-content">
+>>>>>>> origin/main
             <h1>בית ירח <small>Beit Yerach High School</small></h1>
             <p>חינוך מעולה ליד המים היפים של הכנרת, בעמק הירדן. מקום שבו תלמידים צומחים, חולמים ומצליחים.</p>
             <div class="hero-buttons">
@@ -1296,12 +1410,22 @@
             <p class="section-subtitle">בית ספר תיכון ייחודי בלב עמק הירדן, המשלב חינוך מתקדם עם חוויות טבע ייחודיות</p>
         </div>
         <div class="about-content">
+<<<<<<< HEAD
             <div class="about-text reveal-right">
                 <p>בית ירח היא בית ספר תיכון מובנה המוקדש לחינוך איכותי במקום המיוחד של עמק הירדן, סמוך לכנרת. המכללה משלבת בין לימודים מתקדמים ופעילויות חברתיות באמצע הטבע.</p>
                 <div class="about-highlight">
                     <p><strong>תשומת לב:</strong> בתנובת בית הספר תושם דגש על פתיחת חלונות לעולם דרך חקר, טבע וחברה. תלמידינו לומדים בסביבה שמעוררת השראה ומשפיעה.</p>
+=======
+            <div class="about-text">
+                <p>בית ירח היא בית ספר תיכון מובנה המוקדש לחינוך איכותי במקום המיוחד של עמק הירדן, סמוך לכנרת. המכללה
+                    משלבת בין לימודים מתקדמים ופעילויות חברתיות באמצע הטבע.</p>
+                <div class="about-highlight">
+                    <p><strong>תשומת לב:</strong> בתנובת בית הספר תושם דגש על פתיחת חלונות לעולם דרך חקר, טבע וחברה.
+                        תלמידינו לומדים בסביבה שמעורה משהו מיוחד ומשפיע.</p>
+>>>>>>> origin/main
                 </div>
-                <p>ממוקמים על גבעה המשקיפה אל כנרת, אנחנו מעניקים לתלמידים חוויה חינוכית ייחודית הממזגת בין הלימודים העתיקים לחדשנות.</p>
+                <p>ממוקמים על גבעה המשקיפה אל כנרת, אנחנו מעניקים לתלמידים חוויה חינוכית ייחודית הממזגת בין הלימודים
+                    העתיקים לחדשנות.</p>
             </div>
             <div class="about-visual reveal-left">
                 <h3>מיקום ייחודי</h3>
@@ -1441,9 +1565,15 @@
         </div>
         <div class="community-grid stagger-children">
             <div class="community-card">
+<<<<<<< HEAD
                 <span class="card-icon">👨‍🎓</span>
                 <h3>הסטודנטים</h3>
                 <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ. מקום שבו הם יכולים להיות עצמם, לצמוח ולהתפתח.</p>
+=======
+                <h3>👨‍🎓 הסטודנטים</h3>
+                <p>תלמידים מחוננים וממוטיבים מכל רחבי הארץ, האם החדשנות וגם המסורת. מקום שהם יכולים להיות עצמם ולהתפתח.
+                </p>
+>>>>>>> origin/main
             </div>
             <div class="community-card">
                 <span class="card-icon">👩‍🏫</span>
@@ -1500,6 +1630,7 @@
             <p class="footer-copy">&copy; 2026 בית ירח | Beit Yerach High School. כל הזכויות שמורות.</p>
         </div>
     </footer>
+<<<<<<< HEAD
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="חזרה למעלה">&#8593;</button>
@@ -1665,6 +1796,83 @@
         });
 
     })();
+=======
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particlesArray;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight; // Full height background
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                // Match canvas to hero size
+                width = hero.offsetWidth;
+                height = hero.offsetHeight;
+            }
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around
+                if (this.x > width) this.x = 0;
+                if (this.x < 0) this.x = width;
+                if (this.y > height) this.y = 0;
+                if (this.y < 0) this.y = height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            resize();
+            particlesArray = [];
+            for (let i = 0; i < 80; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            init();
+        });
+
+        // Wait for DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            animate();
+        });
+>>>>>>> origin/main
     </script>
 </body>
+
 </html>

@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --lake-blue: #1a5f7a;
+  --sky-blue: #4a9fd8;
+  --light-blue: #7ec8e3;
+  --green: #2d7a4a;
+  --light-green: #5ba86b;
+  --cream: #f5f1e8;
+  --text-dark: #1a1a1a;
+  --accent: #d4a574;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(135deg, var(--cream) 0%, #fafaf7 100%);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.15) translate(-2%, -2%);
+  }
+}
